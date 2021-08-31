@@ -121,14 +121,17 @@
   git stash pop	# 从堆栈中删除更改，并将其放置在当前工作区
   git merge
   git fetch
-  git show
+  git show		# 最近一次【添加/commit】的变动
+  git diff		# 工作区和暂存区之间的对比
+  git remote add origin git@github.com:xiaonanbo1998/notes.git			# 添加远端仓库
+  git config --global core.quotepath false			# 解决【git status】文件不是中文的情况
+  git update-index --assume-unchanged filename		# 忽略【已进行跟踪的文件】
+  git update-index --no-assume-unchanged filename		# 恢复跟踪
   ```
   
   
 
 # 5.参考网址
 
-- [git diff命令 - Git教程™ (yiibai.com)](https://www.yiibai.com/git/git_diff.html)
-- 待办：![image-20210831175021201](C:\Users\zyc\AppData\Roaming\Typora\typora-user-images\image-20210831175021201.png)
-- 你
+- 尝试
 
