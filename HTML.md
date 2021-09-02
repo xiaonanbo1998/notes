@@ -69,7 +69,7 @@
    }
    ```
 
-4. word-break和word-wrap样式属性：[textarea标点符号无法换行 | 微信开放社区 (qq.com)](https://developers.weixin.qq.com/community/develop/doc/0000660ab6c9e85c4a9b3f5ee51800)
+4. line-break：auto [, anywhere]，处理带有标点符号的文本行
 
 
 
