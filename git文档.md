@@ -133,5 +133,15 @@
 
 # 5.参考网址
 
+- npm指令
+
+  ​	
+
+  ```git
+  npm install --registry=https://registry.npm.taobao.org			#	安装依赖，通过taobao镜像网址
+  ```
+
+  
+
 - 尝试
 
