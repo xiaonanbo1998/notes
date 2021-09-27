@@ -50,7 +50,15 @@
    className("ImageView").depth(10).findOne().click()
    ```
 
-4. 【click(text[, i])】和【uniObject.click()】主要区别
+4. 等待的写法
 
-   - 前者【click(text[, i])】，点击文本
-   - 后者【UniObject.click()】，点击控件
+   ```javascript
+   //	写法一，只能等待组件控件出现
+   let tap = text('点击成功').findOne()
+   tap.click()
+   //	写法二，判断当下某个组件，是否存在；不存在，可以执行其他操作，或者一段h时间后结束等待
+   while(!text('点击成功').exists) sleep(1000)
+   text('点击成功').findOnce().click()
+   ```
+
+5. 
