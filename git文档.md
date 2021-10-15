@@ -119,6 +119,9 @@
   git stash		# 将当前工作区更改，保存在堆栈中
   git stash list	# 查看已存在更改的列表
   git stash pop	# 从堆栈中删除更改，并将其放置在当前工作区
+  git stash apply stash@{*}	# 从堆栈中应用更改，且不删除
+  git stash drop stash@{*}	# 从堆栈中移除更改
+  git stash clear	# 删除所有堆栈中的更改
   git merge
   git fetch
   git show		# 最近一次【添加/commit】的变动
