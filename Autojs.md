@@ -3,6 +3,7 @@
 1. 电脑上开发，推送到手机端运行，参见【https://marketplace.visualstudio.com/items?itemName=aaroncheng.auto-js-vsce-fixed】
 3. 安装
    - 参考文章：[首页 - AutoX.js (autoxjs.com)](http://doc.autoxjs.com/#/?id=综述)
+   - 环境：node@12.20.0，npm@6.14.8
    - AutoX.js项目地址：[GitHub - kkevsekk1/AutoX: A UiAutomator on android, does not need root access(安卓平台上的JavaScript自动化工具)](https://github.com/kkevsekk1/AutoX)
    - AutoX.js工程项目地址（实现开发、编译、打包、部署、混淆、加密一体化）：[GitHub - kkevsekk1/webpack-autojs](https://github.com/kkevsekk1/webpack-autojs)
    - 安装流程
@@ -16,7 +17,7 @@
      - 手机端打开【无障碍服务】，通过【IP地址】连接【同一个局域网】的电脑
      - vscode执行【npm run start】，编译并执行代码，在手机端查看；同时支持【热刷新】
      - vscode执行【npm run build】，编译并发布/构建代码，便于手机端打包发布APK，再【签名打包】
-4. 新手文章：[Auto.js快速入门实战教程 - 知乎 (zhihu.com)](https://zhuanlan.zhihu.com/p/90065914)
+3. 新手文章：[Auto.js快速入门实战教程 - 知乎 (zhihu.com)](https://zhuanlan.zhihu.com/p/90065914)
 
 # 一、模块
 
@@ -127,5 +128,20 @@
    back()							//	模拟按下返回键，返回true/false
    ```
 
-8. 提示：慎用退出、紧密逻辑、多打日志、多方测试（开发测试，发布手机测试，打包测试，多手机测试）
+8. 提示：
+
+   - 慎用退出、紧密逻辑、多打日志、多方测试（开发测试，发布手机测试，打包测试，多手机测试）
+   - 命名：不用大小写，使用短横线
+
+# 三、Scheme
+
+1. 参考网址： [(29 封私信 / 80 条消息) 你所知道好玩有趣的 iOS URL Scheme 有哪些？ - 知乎 (zhihu.com)](https://www.zhihu.com/question/19907735/answer/227302030) 
+2. 参考网址： [(26条消息) 常见软件的Scheme_小钢炮的博客-CSDN博客](https://blog.csdn.net/fwx426328/article/details/108241829) 
+3. 参考网址： [(26条消息) 常用URL schemes ✨支付宝 、微信、腾讯、百度、网易、银行 、社交 、音频 、工具大集合_时光不染-CSDN博客](https://blog.csdn.net/hzhnzmyz/article/details/119149058?utm_medium=distribute.pc_relevant.none-task-blog-2~default~BlogCommendFromBaidu~default-7.no_search_link&depth_1-utm_source=distribute.pc_relevant.none-task-blog-2~default~BlogCommendFromBaidu~default-7.no_search_link) 
+4. 参考网址（手动获取URL）： [如何找出APP的URL Scheme - 简书 (jianshu.com)](https://www.jianshu.com/p/2271ca5881e1) 
+5. 常用
+   - 微信：weixin://
+   - 网易云音乐： orpheus:// 
+   - 喜马拉雅：iting://open
+   - 支付宝：alipays://platformapi/startapp?appId=20000001
 

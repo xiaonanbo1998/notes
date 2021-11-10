@@ -144,7 +144,5 @@
   npm install --registry=https://registry.npm.taobao.org			#	安装依赖，通过taobao镜像网址
   ```
 
-  
-
-- 尝试
+- GitHub项目查找：[(29条消息) 三分钟教你如何用Github找开源项目--值得一看！_Z小旋-CSDN博客_github找项目](https://blog.csdn.net/as480133937/article/details/105611577)
 
