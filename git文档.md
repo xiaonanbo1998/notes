@@ -86,7 +86,7 @@
   git branch --delete --force <branch>	# 删除本地分支，不检查合并/merge
   简写	git branch -D <branch>
   git push origin --delete <branch>	# 删除远程和追踪分支
-  
+  git fetch origin <branch1>:<branch2>	# 拉取远端branch1分支，合并到本地新建的branch2分支
   ```
 
   
