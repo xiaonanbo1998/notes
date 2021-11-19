@@ -57,6 +57,24 @@
 
 3. :whale:嵌套路由（参考：[嵌套路由 | Vue Router (vuejs.org)](https://router.vuejs.org/zh/guide/essentials/nested-routes.html)）
 
+4. :whale:编程式导航
+
+   ```javascript
+   // 字符串
+   router.push('home')
+   
+   // 对象
+   router.push({ path: 'home' })
+   
+   // 命名的路由
+   router.push({ name: 'user', params: { userId: '123' }})
+   
+   // 带查询参数，变成 /register?plan=private
+   router.push({ path: 'register', query: { plan: 'private' }})
+   ```
+
+   
+
 # 二、例子
 
 1. 项目结构
@@ -187,12 +205,18 @@
 
 # 三、其他
 
-1. 对象存储
+1. 命名规则
+   
+   - 组件：【current-button】
+   - 文件：【serviceManagement】
+   
+2. 对象存储
+
    - 概述：COS（注：【腾讯云】提供的存储海量文件的分布式存储服务），OSS（注：【阿里云】提供的海量、高可靠的云存储服务）和OBS（注：【华为云】存储服务）等等，都是将存储数据当作对象单独对待，尽管数据可能是非结构化的扁平层级数据。
    - 优势：各个终端可直接向OSS写入或者读取数据，同时配合【原生的传输加速功能】，【CDN产品】，提升重复且并发的下载体验
    - 对比【云盘】：容量提升（注：超大规模机群）；安全性提升（注：冗余备份等等）等等
-   
-2. ES2017的【async】和【await】
+
+3. ES2017的【async】和【await】
 
    - 【async】让函数成为【异步函数】，返回Promise（注：Promise有【catch()函数】、【then()函数】以及【all()函数】）
 
@@ -217,5 +241,5 @@
      console.log('tangSir')  //立即输出tangSir
      ```
 
-   - 
+4. 厂商
 
