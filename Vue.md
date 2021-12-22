@@ -11,38 +11,35 @@
 
    ```javascript
    //	写法一
-   //	1、定义【路由组件】
-   const Foo = { template: '<div>foo</div>'}
-   //	2、定义【路由】
-   const routes = [
+   const Foo = { template: '<div>foo</div>'}		//	1、定义【路由组件】
+   const routes = [								//	2、定义【路由】
        {path: '/foo', component: Foo}
    ]
-   //	3、创建【router实例】并配置
-   const router = new VueRouter({
-       routes	//	缩写：routes: routes
+   const router = new VueRouter({					//	3、创建【router实例】并配置
+       routes									//	缩写：routes: routes
    })
-   //	4、通过【router】属性注入路由
-   const app = new Vue({
+   const app = new Vue({						//	4、通过【router】属性注入路由，同时创建和挂载根实例
        router
    }).$mount('#app')
    
+   
    //	写法二
-   const foo = () => import('@/pages/foo')
+   const foo = () => import('@/pages/foo')			//	foo.vue文件
    const router = new VueRouter({
        routes: [
            {path: '/foo', component: foo}
        ]
    })
    export default router
-   import router './router'
+   import router from './router'
    new Vue({
        el: '#app',
        router
    })
    ```
-
+   
    - 通过【this.$router】访问路由器，通过【this.$route】访问当前路由
-
+   
 2. :whale:简单的动态路由匹配（参考：[动态路由匹配 | Vue Router (vuejs.org)](https://router.vuejs.org/zh/guide/essentials/dynamic-matching.html)）
 
    ```javascript
@@ -243,3 +240,45 @@
 
 4. 厂商
 
+# 四、模块导入
+
+1. 用法一
+
+   ```javascript
+   //	file1.js
+   let obj = {name: 'hank'}
+   export default obj1
+   
+   //	file2.js
+   import obj from './file1'
+   console.log(obj.name)
+   ```
+
+2. 用法二
+
+   ```javascript
+   // file1.js
+   export let str = 'hank'
+   export let num = 1
+   
+   //	file2.js
+   import {str, num} from './file1.js'
+   console.log(str)
+   
+   //	file3.js
+   import * as obj from './file1.js'
+   console.log(obj.str)
+   ```
+
+3. 用法三
+
+   ```javascript
+   //	file1.js
+   console.log('hello')
+   
+   //	file2.js
+   import './file1.js'
+   //	打印得到【hello】
+   ```
+
+   
