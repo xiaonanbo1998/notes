@@ -100,9 +100,29 @@
 
 4. line-break：auto [, anywhere]，处理带有标点符号的文本行
 
-# 四、
+5. word-break
 
+   ```css
+   .English-word {		//	针对英语
+       word-break: normal;		//	可以溢出
+       word-break: break-all;	//	截断单个单词
+       word-break: break-word;	//	不截断单词
+   }
+   ```
 
+   
 
+# 四、背景图片处理
 
+1. :carrot:background-size
+
+   ```css
+   background-size: 50px 50px;			//	设置背景图片宽高，数值可替换成【auto】或者【百分比】
+   background-size: contain;			//	缩放背景图，完全【覆盖】背景区域，同时保持图片的宽高
+   background-size: cover;				//	缩放背景图，完全【装入】背景区域，多余的背景区域，显示背景颜色
+   ```
+
+> [background-size - CSS（层叠样式表） | MDN (mozilla.org)](https://developer.mozilla.org/zh-CN/docs/Web/CSS/background-size)
+>
+> www.hnycw721.com
 

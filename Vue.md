@@ -1,6 +1,6 @@
 # 一、Vue Router
 
-1. :whale:基础使用（参考：[起步 | Vue Router (vuejs.org)](https://router.vuejs.org/zh/guide/)
+1. :whale:基础使用
 
    ```html
    <!-- 导航，渲染成a标签，to属性指定链接🔗 -->
@@ -37,10 +37,14 @@
        router
    })
    ```
-   
-   - 通过【this.$router】访问路由器，通过【this.$route】访问当前路由
-   
-2. :whale:简单的动态路由匹配（参考：[动态路由匹配 | Vue Router (vuejs.org)](https://router.vuejs.org/zh/guide/essentials/dynamic-matching.html)）
+
+   - :warning:通过【this.$router】访问路由器，通过【this.$route】访问当前路由
+
+   - :book:参考
+
+     > [起步 | Vue Router (vuejs.org)](https://router.vuejs.org/zh/guide/)
+
+2. :whale:简单的动态路由匹配
 
    ```javascript
    import foo = () => import('@/pages/foo')
@@ -49,28 +53,97 @@
            {path: '/foo/:id', component: foo}			//	则【/foo/userone】和【/foo/usertwo】都映射到相同路由
        ]
    })
-   console.log(this.$route.params.id)					//	输出当前路由传入的【id】
    ```
 
-3. :whale:嵌套路由（参考：[嵌套路由 | Vue Router (vuejs.org)](https://router.vuejs.org/zh/guide/essentials/nested-routes.html)）
+   - :warning:通过【this.$route.params.id】获取传入参数
+
+   - :warning:组件复用，不会再触发组件的【生命周期函数】
+
+   - :book:参考
+
+     > [动态路由匹配 | Vue Router (vuejs.org)](https://router.vuejs.org/zh/guide/essentials/dynamic-matching.html)
+
+3. :whale:嵌套路由
+
+   - :warning:注意以【/】开头的【根路径】
+
+   - 访问【有子路由的根路由】时，界面不会有任何东西，必须匹配子路由
+
+   - :book:参考
+
+     > [嵌套路由 | Vue Router (vuejs.org)](https://router.vuejs.org/zh/guide/essentials/nested-routes.html)
 
 4. :whale:编程式导航
 
    ```javascript
+   //	this.$router.push()，声明式【<router-link :to="...">】，入栈操作
    // 字符串
-   router.push('home')
+   this.$router.push('home')
    
    // 对象
-   router.push({ path: 'home' })
+   this.$router.push({ path: 'home' })
    
    // 命名的路由
-   router.push({ name: 'user', params: { userId: '123' }})
+   this.$router.push({ name: 'user', params: { userId: '123' }})
    
    // 带查询参数，变成 /register?plan=private
-   router.push({ path: 'register', query: { plan: 'private' }})
+   this.$router.push({ path: 'register', query: { plan: 'private' }})
+   
+   
+   //	this.$router.replace()，声明式【<router-link :to="..." replace>】，替换栈顶
+   
+   
+   //	this.$router.go(num)，history栈中向前或者向后多少步
    ```
 
+5. :whale:命名路由和:whale:命名视图
+
+   ```javascript
+   //	命名路由
+   const router = new VueRouter({
+       routes: [
+           {
+               path: '/user/:userId',
+               name: 'user',
+               component: User
+           }
+       ]
+   })
    
+   //	命名视图
+   //	路由组件一【router-view/】，默认名称【default】
+   //	路由组件二【router-ciew name="two"】
+   const router = new VueRouter({
+       routes: [
+           {
+               path: '/',
+               components: {			//	注意是【components】，多了一个s
+                   default: Foo,
+                   two: Bar
+               }
+           }
+       ]
+   })
+   ```
+
+6. :whale:重定向和别名
+
+   ```javascript
+   const router = new VueRouter({
+       routes: [
+           {
+               path: '/a',
+               redirect: '/b'					//	写法一
+           },
+           {
+               path: '/c',
+               redirect: {name: 'ddd'}			//	写法二
+           }
+       ]
+   })
+   ```
+
+7. :whale:路由组件传参？？？？？？？？？？？？？？？？？？
 
 # 二、例子
 
@@ -238,7 +311,7 @@
      console.log('tangSir')  //立即输出tangSir
      ```
 
-4. 厂商
+4. [从vue源码解析Vue.set()和this.$set()_vue.js_脚本之家 (jb51.net)](https://www.jb51.net/article/146580.htm)
 
 # 四、模块导入
 
