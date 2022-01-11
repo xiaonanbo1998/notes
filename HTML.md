@@ -81,6 +81,7 @@
 # 二、弹性布局
 
 1. 参考文章：space-evenly：[解决flex布局的space-evenly兼容性问题 - 简书 (jianshu.com)](https://www.jianshu.com/p/bbd114834c59)
+2. 【fixed】和【absolute】不会撑大盒子
 
 # 三、文字溢出处理
 
@@ -118,11 +119,9 @@
 
    ```css
    background-size: 50px 50px;			//	设置背景图片宽高，数值可替换成【auto】或者【百分比】
-   background-size: contain;			//	缩放背景图，完全【覆盖】背景区域，同时保持图片的宽高
-   background-size: cover;				//	缩放背景图，完全【装入】背景区域，多余的背景区域，显示背景颜色
+   background-size: cover;				//	缩放背景图，完全【覆盖】背景区域，至少宽或者高相等，同时保持图片的宽高
+   background-size: contain;			//	缩放背景图，完全【装入】背景区域，多余的背景区域，显示背景颜色
    ```
 
 > [background-size - CSS（层叠样式表） | MDN (mozilla.org)](https://developer.mozilla.org/zh-CN/docs/Web/CSS/background-size)
->
-> www.hnycw721.com
 
