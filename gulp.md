@@ -25,7 +25,7 @@
    Local version 4.0.0
    ```
 
-   - 创建【gulp】文件
+   - 创建【gulpfile.js】文件
 
    ```javascript
    function defaultTask(cb) {	//	cb变量，函数作为【任务】的时候不用传入，单独调用不传参会报错
@@ -49,10 +49,10 @@
 
    - 项目一定要有【gulpfile.js】文件或者【gulpfile.js文件夹】和文件夹下的【index.js】文件
    - 常用API
-     - :pineapple:src：文件读取
-     - :pineapple:dest：文件输出
-     - :pineapple:series：串行任务
-     - :pineapple:parallel：并发任务
+     - :pineapple:src()函数：文件读取
+     - :pineapple:dest()函数：文件输出
+     - :pineapple:series()函数：串行任务
+     - :pineapple:parallel()函数：并发任务
      - :pineapple:pipe()函数：发出【异步完成】信号
      - :pineapple:uglify()函数：压缩混淆文件
    - 常用模块：【gulp-rename】、【gulp-replace】、【fs】、【path】

@@ -114,24 +114,50 @@
 
 - 其他
 
-  ```git
-  git branch --sep-upstream master origin/next	# 指定master分支，追踪origin/next分支
-  git stash		# 将当前工作区更改，保存在堆栈中
-  git stash list	# 查看已存在更改的列表
-  git stash pop	# 从堆栈中删除更改，并将其放置在当前工作区
-  git stash apply stash@{*}	# 从堆栈中应用更改，且不删除
-  git stash drop stash@{*}	# 从堆栈中移除更改
-  git stash clear	# 删除所有堆栈中的更改
-  git merge
-  git fetch
-  git show		# 最近一次【添加/commit】的变动
-  git remote add origin git@github.com:xiaonanbo1998/notes.git			# 添加远端仓库
-  git config --global core.quotepath false			# 解决【git status】文件不是中文的情况
-  git update-index --assume-unchanged filename		# 忽略【已进行跟踪的文件】
-  git update-index --no-assume-unchanged filename		# 恢复跟踪
-  ```
+  - 指定【master分支】，追踪【origin/next分支】
   
+    ```shell
+    git branch --set-upstream master origin/next
+    ```
   
+  - 【stash】相关指令
+  
+    ```shell
+    git stash		#	将当前工作区更改，保存在堆栈中
+    git stash list	#	查看已存在更改的列表
+    git stash pop	#	从堆栈中删除更改，并将其放置在当前工作区
+    git stash apply stash@{*}	#	从堆栈中应用某一项更改，且不删除
+    git stash drop stash@{*}	#	从堆栈中移除更改
+    git stash clear				#	清空堆栈
+    ```
+  
+  - 【show】和【diff】相关指令
+  
+    ```shell
+    git show	#	查看上次提交修改的内容
+    git show 【log】	#	指定查看某次的提交修改的内容（首七位字符）
+    git diff	#	查看当前本地修改的内容
+    git diff 【log1】 【log2】	#	增加的是当前内容，删除的是上个版本内容
+    ```
+  
+  - 解决乱码问题
+  
+    ```shell
+    git config --global core.quotepath false			# 解决【git status】查看中文乱码的情况，因为默认情况下，中文显示为八进制的字符编码；除此之外，还要设置【git bash】终端的中文乱码情况，终端右键菜单中设置本地中文，以及字符编码为【UTF-8】
+    ```
+  
+    > 参考： [(47条消息) git status 显示中文和解决中文乱码_夏虫不可语冰-CSDN博客_git status 中文乱码](https://blog.csdn.net/u012145252/article/details/81775362?spm=1001.2101.3001.6650.1&utm_medium=distribute.pc_relevant.none-task-blog-2~default~CTRLIST~default-1.pc_relevant_default&depth_1-utm_source=distribute.pc_relevant.none-task-blog-2~default~CTRLIST~default-1.pc_relevant_default&utm_relevant_index=2) 
+  
+  - 其他
+  
+    ```shell
+    git merge
+    git fetch
+    git remote add origin git@github.com:xiaonanbo1998/notes.git	#	添加远端仓库
+    
+    git update-index --assume-unchanged filename		#	忽略【已进行跟踪的文件】
+    git update-index --no-assume-unchanged filename		#	恢复跟踪
+    ```
 
 # 5.参考网址
 
@@ -144,4 +170,3 @@
   ```
 
 - GitHub项目查找：[(29条消息) 三分钟教你如何用Github找开源项目--值得一看！_Z小旋-CSDN博客_github找项目](https://blog.csdn.net/as480133937/article/details/105611577)
-
