@@ -354,4 +354,227 @@
    //	打印得到【hello】
    ```
 
-   
+
+# 五、Vuex
+
+1. 【状态/state】和【全局对象】
+
+   - Vuex状态存储是【响应式】的，状态/state变化，相应组件也高效更新
+   - 不能直接改变（赋值等操作）状态/state，唯一途径是【显式提交/commit一个mutation】，能跟踪状态变化的前后，方便工具调试
+
+2. :ice_cream:基础操作
+
+   - 初始化
+
+     ```javascript
+     import Vue from 'vue'
+     import Vuex from 'vuex'
+     
+     Vue.use(Vuex)
+     
+     const store = new Vuex.Store({
+         state: {
+             count: 0,
+         },
+         mutations: {
+             increment (state) {
+                 state.count++
+             }
+         }
+     })
+     ```
+
+   - 直接调用
+
+     ```javascript
+     store.commit('increment')
+     console.log(store.state.count)			//	结果是【1】
+     ```
+
+   - 注入
+
+     ```javascript
+     new Vue({
+         el: '#app',
+         store								//	ES5写法：store: store
+     })
+     ```
+
+   - 组件的调用
+
+     ```javascript
+     methods: {
+         increment() {
+             this.$store.commit('increment')
+             console.log(this.$store.state.count)
+         }
+     }
+     ```
+
+3. :ice_cream:State的简单介绍
+
+   - 从计算属性获取
+
+     ```javascript
+     const Counter = {
+         template: `<div>{{ count }}</div>`,
+         computed: {
+             count () {							//	注意名称
+     			return store.state.count		//	返回store.state中的某个状态
+             }
+         }
+     }
+     ```
+
+   - 通过【注入】的方式，访问store实例对象
+
+     ```javascript
+     Vue.use(Vuex)
+     const app = new Vue({
+         el: '#app',
+         store,
+         component: { Counter },
+         template: `
+     		<div class="app">
+     			<counter></counter>
+     		</div>
+     	`
+     })
+     
+     const Counter = {
+         template: `<div>{{ count }}</div>`,
+         computed: {
+             count () {
+                 return this.$store.state.count
+             }
+         }
+     }
+     ```
+
+   - 采用【mapState】辅助函数
+
+     ```javascript
+     import { mapState } from 'vuex'
+     
+     export default {
+         computed: mapState({
+             count: state => state.count,		//	写法一、
+             countAlias: 'count',				//	写法二，等同于写法一
+         })
+         computed: mapState([
+         	'count'							//	写法三，计算属性的名称和状态/state名称相同时，传递【字符串数组】
+         ])
+         computed: {
+           	...mapState({...})				//	写法四，对象展开运算符
+         }
+     }
+     ```
+
+4. :ice_cream:Getters简单介绍
+
+5. :ice_cream:Mutations简单介绍，同步事务
+
+   - 简单调用
+
+     ```javascript
+     const store = new Vuex.Store({
+         state: {
+             count: 1
+         },
+         mutations: {
+             increment (state) {
+                 state.count++
+             }
+         }
+     })
+     
+     //	不能直接调用mutations中的函数，要通过【type】调用【store.commit】方法
+     store.commit('increment')
+     ```
+
+   - 提交载荷/传参/payload
+
+     ```javascript
+     mutations: {
+         increment (state, n) {
+             state.count += n
+         }
+     }
+     
+     //	调用，注意【参数个数】
+     store.commit('increment', 10)
+     
+     //	另外一种调用/提交方式
+     store.commit({
+         type: 'increment',
+         amount: 10
+     })
+     mutations: {
+         increment (state, payload) {
+             state.count += payload.amount
+         }
+     }
+     ```
+
+   - 常量替代Mutation事件类型
+
+     > 参考：[Mutation | Vuex (vuejs.org)](https://vuex.vuejs.org/zh/guide/mutations.html#mutation-需遵守-vue-的响应规则)
+
+   - 采用【mapMutations】辅助函数
+
+     ```javascript
+     import { mapMutations } from 'vuex'
+     
+     export default {
+         methods: {
+             //	写法一
+             ...mapMutations([
+                 'increment',				//	将【this.increment()】映射为【this.$store.commit('increment')】
+                 'incrementBy'				//	将【this.incrementBy(amount)】映射为【this.$store.commit('incrementyBy', amount)】
+             ]),
+             ...mapMutations({
+                 add: 'increment'			//	将【this.add()】映射为【this.$store.commit('increment')】
+             })
+         }
+     }
+     ```
+
+6. :ice_cream:Action简单介绍
+
+   1. 和Mutation的区别
+
+      - Action提交的是Mutation，不是【直接变更状态】
+      - Action可以包含【异步操作】
+
+   2. 简单注册
+
+      ```javascript
+      const store = new Vuex.Store({
+          state: {
+              count: 0
+          },
+          mutations: {
+              increment (state) {
+                  state.count++
+              }
+          },
+          actions: {
+              increment (context) {
+                  context.commit('increment')
+              }
+          }
+      })
+      ```
+
+      - 参数解构
+
+        ```javascript
+        actions: {
+            increment ({ commit }) {
+                commit('increment')
+            }
+        }
+        ```
+
+        
+

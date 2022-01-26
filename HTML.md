@@ -81,7 +81,21 @@
 # 二、弹性布局
 
 1. 参考文章：space-evenly：[解决flex布局的space-evenly兼容性问题 - 简书 (jianshu.com)](https://www.jianshu.com/p/bbd114834c59)
+
 2. 【fixed】和【absolute】不会撑大盒子
+
+3. :ice_cream:盒子模型之【box-sizing】属性
+
+   ```css
+   .box-style {
+       box-sizing: content-box;			//	默认值，宽高只包括内容宽高
+       box-sizing: border-box;				//	宽高包括内容，内边距和边框的宽高
+   }
+   ```
+
+   > 参考：[box-sizing - CSS（层叠样式表） | MDN (mozilla.org)](https://developer.mozilla.org/zh-CN/docs/Web/CSS/box-sizing)
+
+4. 留白
 
 # 三、文字溢出处理
 
@@ -92,26 +106,32 @@
 3. text-overflow：clip(默认值) [, ellipsis]，处理溢出内容展示
 
    ```css
-   .txt {
+   .txt {						//	效果：汉字单行显示，溢出内容【...】代替
        overflow: hidden;
        white-space: nowrap;
        text-overflow: ellipsis;
    }
    ```
 
-4. line-break：auto [, anywhere]，处理带有标点符号的文本行
+4. :carrot:line-break：auto [, anywhere]，处理带有标点符号的文本行
 
-5. word-break
+5. :carrot:【word-break】和【overflow-wrap】
 
+   - :notebook:【word-wrap 】属性原本属于微软的一个私有属性，在 CSS3 现在的文本规范草案中已经被重名为 【overflow-wrap】 。 【word-wrap】现在被当作 overflow-wrap 的 “别名”。 稳定的谷歌 Chrome 和 Opera 浏览器版本支持这种新语法。
+   
    ```css
    .English-word {		//	针对英语
        word-break: normal;		//	可以溢出
-       word-break: break-all;	//	截断单个单词
-       word-break: break-word;	//	不截断单词
+       word-break: break-all;	//	截断单个单词，并换行
+       word-break: break-word;	//	不截断单词，换行
+   }
+   .English-word {
+       overflow-wrap: normal;		//	在正常断点处中断换行
+       overflow-wrap: break-word;	//	截断单词，并换行
    }
    ```
-
    
+   > 参考：[overflow-wrap - CSS（层叠样式表） | MDN (mozilla.org)](https://developer.mozilla.org/zh-CN/docs/Web/CSS/overflow-wrap)
 
 # 四、背景图片处理
 
