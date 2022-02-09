@@ -1,6 +1,13 @@
+# 零、表情符号
+
+- :whale:一级类别
+- :warning:注意
+- :ice_cream:【小知识点】下的类别
+- :book:参考
+
 # 一、Vue Router
 
-1. :whale:基础使用
+1. 基础使用
 
    ```html
    <!-- 导航，渲染成a标签，to属性指定链接🔗 -->
@@ -11,14 +18,14 @@
 
    ```javascript
    //	写法一
-   const Foo = { template: '<div>foo</div>'}		//	1、定义【路由组件】
+   const Foo = { template: '<div>foo</div>'}			//	1、定义【路由组件】
    const routes = [								//	2、定义【路由】
        {path: '/foo', component: Foo}
    ]
    const router = new VueRouter({					//	3、创建【router实例】并配置
-       routes									//	缩写：routes: routes
+       routes
    })
-   const app = new Vue({						//	4、通过【router】属性注入路由，同时创建和挂载根实例
+   const app = new Vue({							//	4、通过【router】属性注入路由，同时【创建和挂载】根实例
        router
    }).$mount('#app')
    
@@ -38,7 +45,7 @@
    })
    ```
 
-   - :warning:通过【this.$router】访问路由器，通过【this.$route】访问当前路由
+   - :warning:通过【this.$router】访问【路由器】，通过【this.$route】访问【当前路由】
 
    - :book:参考
 
@@ -55,9 +62,26 @@
    })
    ```
 
-   - :warning:通过【this.$route.params.id】获取传入参数
+   - :warning:动态路径参数，以冒号开头，如【/foo/:id】，参数值设置到【this.$route.params】对象中
 
-   - :warning:组件复用，不会再触发组件的【生命周期函数】
+   - :warning:组件复用，不会再触发组件的【生命周期函数】，可以通过【watch属性】监听【$route】对象的变化
+
+     ```javascript
+     const User = {
+         template: '...',
+         watch: {									//	方法一
+             $route(to, from) {
+                 //	对路由变化的响应
+             }
+         },
+         beforeRouteUpdate(to, from, next) {				//	方法二，导航守卫
+             //	react to route changes...
+             next()
+         }
+     }
+     ```
+
+   - 匹配优先级：同一个路径匹配多个路由的时候，优先级为【路由的定义顺序，从前到后，优先级递减】
 
    - :book:参考
 
@@ -65,38 +89,68 @@
 
 3. :whale:嵌套路由
 
-   - :warning:注意以【/】开头的【根路径】
+   - 案例
 
-   - 访问【有子路由的根路由】时，界面不会有任何东西，必须匹配子路由
+      ```html
+      <div id="app">
+          <router-view></router-view>				<!-- 顶层出口 -->
+      </div>
+      ```
 
-   - :book:参考
+      ```vue
+      const User = {
+      	template: `
+      		<div class="user">
+                  <h2>User {{ $route.params.id }}</h2>
+                  <router-view></router-view>
+      		</div>`
+      }
+      ```
 
-     > [嵌套路由 | Vue Router (vuejs.org)](https://router.vuejs.org/zh/guide/essentials/nested-routes.html)
+      ```javascript
+      const router = new VueRouter({
+          routes: [
+              {
+                  path: '/user/:id',
+                  component: User,
+                  children: [							//		嵌套路由的关键配置
+                      path: 'profile',				//		没有【/】符号，匹配【/user/:id/profile】路径
+                      component: UserProfile
+                  ]
+              }
+          ]
+      })
+      ```
 
 4. :whale:编程式导航
 
    ```javascript
-   //	this.$router.push()，声明式【<router-link :to="...">】，入栈操作
+   //	编程式【this.$router.push()】，声明式【<router-link :to="...">】，入栈操作
    // 字符串
    this.$router.push('home')
    
-   // 对象
+   //	对象
    this.$router.push({ path: 'home' })
    
-   // 命名的路由
+   //	命名的路由，变成 /user/123，注意是【name】不是【path】
    this.$router.push({ name: 'user', params: { userId: '123' }})
+   //	等价于
+   const userId = '123'
+   this.$router.push({ path: `/user/${userId}` })
    
-   // 带查询参数，变成 /register?plan=private
+   //	带查询参数，变成 /register?plan=private
    this.$router.push({ path: 'register', query: { plan: 'private' }})
    
-   
    //	this.$router.replace()，声明式【<router-link :to="..." replace>】，替换栈顶
-   
    
    //	this.$router.go(num)，history栈中向前或者向后多少步
    ```
 
-5. :whale:命名路由和:whale:命名视图
+   - :book:参考
+
+     > [编程式的导航 | Vue Router (vuejs.org)](https://v3.router.vuejs.org/zh/guide/essentials/navigation.html)
+
+5. :whale:【命名路由】和【命名视图】
 
    ```javascript
    //	命名路由
@@ -109,10 +163,13 @@
            }
        ]
    })
+   //	声明式导航【<router-link :to="{ name: 'user', params: { userId: 123 }}">】
+   //	编程式导航【this.$router.push({ name: 'user', params: { userId: 123 }})】
+   
    
    //	命名视图
    //	路由组件一【router-view/】，默认名称【default】
-   //	路由组件二【router-ciew name="two"】
+   //	路由组件二【router-view name="two"】
    const router = new VueRouter({
        routes: [
            {
@@ -125,6 +182,10 @@
        ]
    })
    ```
+
+   - :book::warning:参考案例：嵌套命名视图
+
+     > [命名视图 | Vue Router (vuejs.org)](https://v3.router.vuejs.org/zh/guide/essentials/named-views.html#嵌套命名视图)
 
 6. :whale:重定向和别名
 
@@ -360,9 +421,9 @@
 1. 【状态/state】和【全局对象】
 
    - Vuex状态存储是【响应式】的，状态/state变化，相应组件也高效更新
-   - 不能直接改变（赋值等操作）状态/state，唯一途径是【显式提交/commit一个mutation】，能跟踪状态变化的前后，方便工具调试
+   - 不能【直接改变/赋值】等操作状态/state，唯一途径是【显式提交/commit】一个mutation，能跟踪状态变化的前后，方便工具调试
 
-2. :ice_cream:基础操作
+2. 基础操作
 
    - 初始化
 
@@ -391,7 +452,7 @@
      console.log(store.state.count)			//	结果是【1】
      ```
 
-   - 注入
+   - :warning:注入
 
      ```javascript
      new Vue({
@@ -411,7 +472,7 @@
      }
      ```
 
-3. :ice_cream:State的简单介绍
+3. :whale:State的简单介绍
 
    - 从计算属性获取
 
@@ -420,7 +481,7 @@
          template: `<div>{{ count }}</div>`,
          computed: {
              count () {							//	注意名称
-     			return store.state.count		//	返回store.state中的某个状态
+     			return store.state.count		//	返回store.state中count变量的状态
              }
          }
      }
@@ -451,28 +512,85 @@
      }
      ```
 
-   - 采用【mapState】辅助函数
+   - 【mapState】辅助函数
 
      ```javascript
      import { mapState } from 'vuex'
      
      export default {
          computed: mapState({
-             count: state => state.count,		//	写法一、
+             count: state => state.count,		//	写法一
              countAlias: 'count',				//	写法二，等同于写法一
          })
          computed: mapState([
          	'count'							//	写法三，计算属性的名称和状态/state名称相同时，传递【字符串数组】
          ])
          computed: {
-           	...mapState({...})				//	写法四，对象展开运算符
+           	...mapState({					//	写法四，对象展开运算符
+                 count: state => state.count
+             }),
+            	...mapState([
+                 'count'
+             ])
          }
      }
      ```
 
-4. :ice_cream:Getters简单介绍
+4. :whale:Getters简单介绍
 
-5. :ice_cream:Mutations简单介绍，同步事务
+   - 可以认为是【store的计算属性】，其返回值根据它的依赖被缓存起来，只有依赖改变，才会重新计算
+
+   - 定义和访问
+
+     ```javascript
+     //	定义
+     const store = new Vuex.Store({
+         state: {
+             todos: [
+                 { id: 1, text: '...', done: true },
+                 { id: 2, text: '...', done: false }
+             ]
+         },
+         getters: {
+             doneTodos: state => {
+                 return state.todos.filter(todo => todo.done)
+             }
+         }
+     })
+     
+     //	访问
+     //	1、属性访问，作为Vue的部分缓存
+     this.$store.getters.doneTodos
+     //	2、方法访问（内部返回一个方法，外部通过方法访问），不作为Vue的部分缓存
+     getters: {
+         getTodoById: (state) => (id) => {
+             return state.todos.find(todo => todo.id === id)
+         }
+     }
+     store.getters.getTodoById(2)	//	结果【{ id: 2, text: '...', done: false }】
+     ```
+
+   - 【mapGetters()】辅助函数
+
+     ```javascript
+     import { mapGetters } from 'vuex'
+     
+     export default {
+         computed: {
+             ...mapGetters([					//	写法一，数组形式
+                 'doneTodosCount',
+                 'anotherGetter'
+             ]),
+             ...mapGetters({
+                 doneCount: 'doneTodosCount'		//	写法二，对象形式
+             })
+         }
+     }
+     ```
+
+     
+
+5. :whale:Mutations简单介绍，同步事务
 
    - 简单调用
 
@@ -488,7 +606,7 @@
          }
      })
      
-     //	不能直接调用mutations中的函数，要通过【type】调用【store.commit】方法
+     //	不能直接调用mutations中的函数，要根据【type】调用【store.commit】方法，更改state
      store.commit('increment')
      ```
 
@@ -516,9 +634,9 @@
      }
      ```
 
-   - 常量替代Mutation事件类型
+   - 常量替代Mutation事件类型，:book:参考
 
-     > 参考：[Mutation | Vuex (vuejs.org)](https://vuex.vuejs.org/zh/guide/mutations.html#mutation-需遵守-vue-的响应规则)
+     > [Mutation | Vuex (vuejs.org)](https://vuex.vuejs.org/zh/guide/mutations.html#mutation-需遵守-vue-的响应规则)
 
    - 采用【mapMutations】辅助函数
 
@@ -539,14 +657,14 @@
      }
      ```
 
-6. :ice_cream:Action简单介绍
+6. :whale:Action简单介绍，异步事务
 
-   1. 和Mutation的区别
+   - 和Mutation的区别
 
       - Action提交的是Mutation，不是【直接变更状态】
       - Action可以包含【异步操作】
 
-   2. 简单注册
+   - 简单注册
 
       ```javascript
       const store = new Vuex.Store({
@@ -559,22 +677,96 @@
               }
           },
           actions: {
-              increment (context) {
+              incrementAsync (context) {
                   context.commit('increment')
+              },
+              add ({ commit }) {					//	ES2015的参数解构写法
+                  commit('increment')
               }
           }
       })
       ```
 
-      - 参数解构
+   - 分发Action
 
-        ```javascript
-        actions: {
-            increment ({ commit }) {
-                commit('increment')
-            }
-        }
-        ```
+     ```javascript
+     store.dispatch('incrementAsync')					//	写法一
+     store.dispatch('incrementAsync', {				//	写法一（载荷）
+         amount: 10
+     })
+     store.dispatch({									//	写法二（载荷）
+         type: 'incrementAsync',
+         amount: 10
+     })
+     
+     //	采用【mapActions】辅助函数
+     export default {
+         methods: {
+             ...mapActions([
+                 'incrementAsync',
+                 'incrementAsyncBy'
+             ]),
+             ...mapActions([
+                 add: 'incrementAsync'
+             ])
+         }
+     }
+     ```
 
-        
+   - 组合使用
+
+     ```javascript
+     //	假设【getData()】和【getOtherData()】返回的是【Promise】
+     actions: {
+         async actionA ({ commit }) {
+             commit('gotData', await getData())
+         },
+     	async actionB ({ dispatch, commit }) {
+             await dispatch('actionA')
+             commit('gotOtherData', await getOtherData())
+         }
+     }
+     ```
+
+7. :whale:Module简单介绍
+
+# 六、小知识点
+
+1. :ice_cream:$nextTick()函数：
+
+   - Vue更新DOM是异步操作，该函数在更新完毕后，进行回调。Vue在观察到数据变化时，不直接更新DOM，而是开启【异步更新队列】，缓冲同一事件中发生的所有数据改变
+
+   - 使用方式
+
+     ```vue
+     <template>
+     	<div>
+             <div id="changeDom" v-if="showDiv">显示文本</div>
+     		<button @click="showAndGetText">获取内容</button>
+         </div>
+         </div>
+     </template>
+     <script>
+     export default {
+         data () {
+             return {
+                 showDiv: false
+             }
+         },
+         methods: {
+             showAndGetText () {
+                 this.showDiv = true
+                 this.$nextTick(function () {						//	等待该【点击事件】完成所有数据更改并更新DOM后，回调该函数
+                     let text = document.getElementById('changeDom').innerHTML
+                     console.log('内容为：', text)
+                 })
+             }
+         }
+     }
+     </script>
+     ```
+
+   - :book:参考
+   
+     > [(49条消息) $nextTick()的作用_splx2013的博客-CSDN博客_nexttick](https://blog.csdn.net/splx2013/article/details/107636868)
 
