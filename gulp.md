@@ -1,3 +1,9 @@
+# 符号注释
+
+- :book:注释
+- :pineapple:分类
+- :snowflake:注意
+
 # Gulp-自动化构建工具
 
 1. 检查环境，安装【命令行工具】
@@ -43,7 +49,7 @@
    gulp task1 task2		//	执行task1和task2
    ```
 
-   - :notebook_with_decorative_cover:Node 的模块解析功能允许你将 `gulpfile.js`' 文件替换为同样命名为 `gulpfile.js` 的目录，该目录中包含了一个名为 `index.js` 的文件，该文件被当作 `gulpfile.js` 使用。并且，该目录中还可以包含各个独立的任务（task）模块。
+   - :warning:Node 的模块解析功能允许你将 `gulpfile.js`' 文件替换为同样命名为 `gulpfile.js` 的目录，该目录中包含了一个名为 `index.js` 的文件，该文件被当作 `gulpfile.js` 使用。并且，该目录中还可以包含各个独立的任务（task）模块。
 
 3. 基础API，模块和插件
 
@@ -73,7 +79,9 @@
    action.eat()
    ```
 
-   > 参考：【干饭人】——【二十一、CommonJS和NodeJS模块化】
+   :book:参考
+
+   > 【干饭人】——【二十一、CommonJS和NodeJS模块化】
 
 5. 常用指令
 
@@ -82,7 +90,11 @@
    - gulp --tasks：查看注册的【task/任务】
    - gulp taskName：执行【taskName】任务
 
-6. 参考网址
+6. :snowflake:配合使用
+
+   - 
+
+7. 参考网址
 
    > gulp网址：[JavaScript 和 Gulpfile · gulp.js 中文文档 (gulpjs.com.cn)](https://www.gulpjs.com.cn/docs/getting-started/javascript-and-gulpfiles/)
    >

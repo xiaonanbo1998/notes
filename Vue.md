@@ -18,7 +18,7 @@
 
    ```javascript
    //	写法一
-   const Foo = { template: '<div>foo</div>'}			//	1、定义【路由组件】
+   const Foo = { template: '<div>foo</div>' }			//	1、定义【路由组件】
    const routes = [								//	2、定义【路由】
        {path: '/foo', component: Foo}
    ]
@@ -51,7 +51,7 @@
 
      > [起步 | Vue Router (vuejs.org)](https://router.vuejs.org/zh/guide/)
 
-2. :whale:简单的动态路由匹配
+2. :whale:动态路由匹配
 
    ```javascript
    import foo = () => import('@/pages/foo')
@@ -124,9 +124,11 @@
 
 4. :whale:编程式导航
 
+   - :warning:注意【/】的使用
+
    ```javascript
    //	编程式【this.$router.push()】，声明式【<router-link :to="...">】，入栈操作
-   // 字符串
+   //	字符串
    this.$router.push('home')
    
    //	对象
@@ -141,7 +143,7 @@
    //	带查询参数，变成 /register?plan=private
    this.$router.push({ path: 'register', query: { plan: 'private' }})
    
-   //	this.$router.replace()，声明式【<router-link :to="..." replace>】，替换栈顶
+   //	this.$router.replace(location, onComplete?, onAbort?)，声明式【<router-link :to="..." replace>】，替换栈顶
    
    //	this.$router.go(num)，history栈中向前或者向后多少步
    ```
@@ -190,21 +192,90 @@
 6. :whale:重定向和别名
 
    ```javascript
+   //	重定向
    const router = new VueRouter({
        routes: [
            {
                path: '/a',
-               redirect: '/b'					//	写法一
+               redirect: '/b'					//	写法一，字符串
            },
            {
-               path: '/c',
-               redirect: {name: 'ddd'}			//	写法二
+               path: '/a',
+               redirect: {name: 'foo'}			//	写法二，对象
+           },
+           {
+               path: '/a',
+               redirect: to => {
+                   //	方法接收【目标路由】作为参数，这里即【/a】
+                   return  '' || {}			//	返回【字符串路径】或者【路径对象】
+               }
+           }
+       ]
+   })
+   
+   //	别名
+   const router = new VueRouter({
+       routes: [
+           {
+               path: '/a',
+               component: A,
+               alias: '/b'
            }
        ]
    })
    ```
 
-7. :whale:路由组件传参？？？？？？？？？？？？？？？？？？
+7. 路由组件传参？？？？？？？？？？？？？？？？？？
+
+8. VueRouter模式
+
+   - 默认【hash模式】
+
+   - 可选【history模式】等等
+
+     ```javascript
+     const router = new VueRouter({
+         mode: 'history',
+         routes: [...]
+     })
+     ```
+
+9. 进阶
+
+   :ice_cream:导航守卫，:book:参考
+
+   > [导航守卫 | Vue Router (vuejs.org)](https://v3.router.vuejs.org/zh/guide/advanced/navigation-guards.html#完整的导航解析流程)
+
+   :ice_cream:路由懒加载，:book:参考
+
+   > [路由懒加载 | Vue Router (vuejs.org)](https://v3.router.vuejs.org/zh/guide/advanced/lazy-loading.html#路由懒加载)
+
+   :ice_cream:导航故障，:book:参考
+
+   > [导航故障 | Vue Router (vuejs.org)](https://v3.router.vuejs.org/zh/guide/advanced/navigation-failures.html#导航故障)
+
+10. 案例
+
+    - 监听【route】
+
+      ```javascript
+      watch: {
+          $route (to, from) {							//	方法一
+              console.log(to.path)
+          },
+      	$route: {									//	方法二
+              handler: function (val, oldVal) {
+                  console.log(val)
+              },
+              //	深度观察监听
+      		deep: true
+          }
+      }
+      ```
+
+      :book:参考
+
+      > [Vue监听路由变化 - 简书 (jianshu.com)](https://www.jianshu.com/p/c0440894c82e)
 
 # 二、例子
 

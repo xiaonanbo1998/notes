@@ -1,3 +1,9 @@
+# 零、表情符号介绍
+
+- :book:参考
+- :lollipop:一级分类
+- :warning:注意
+
 # 一、API介绍
 
 - uni.getStorageSync(key)
@@ -63,5 +69,9 @@
 - uni.navigateBack()：关闭当前页面，返回上一页面或多级页面
 - uni.reLaunch()：关闭所有页面，打开到应用内的某个页面
 
-# 三、功能测试
+# 三、其他
+
+1. H5页面开发，:book:参考
+
+   > [(50条消息) 使用uniapp开发微信公众号（H5页面），用微信开发者工具调试微信公众号_LzzMandy的博客-CSDN博客_uniapp 开发微信公众号](https://blog.csdn.net/LzzMandy/article/details/104989910)
 

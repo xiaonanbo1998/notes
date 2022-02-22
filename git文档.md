@@ -110,6 +110,10 @@
   git pull <远程主机名> <远程分支名>:<本地分支名>
   git pull origin next:master	# 取回origin远端的next分支，与本地master分支合并
   git pull origin next	# 取回远端next分支，合并到当前分支
+  
+  #	用远端覆盖本地
+  git fetch --all			#	下载远端库的内容
+  get reset --hard origin/master		#	master代指远端某个分支，完全覆盖本地当前分支
   ```
 
 - 其他

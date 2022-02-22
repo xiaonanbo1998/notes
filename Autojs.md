@@ -145,3 +145,10 @@
    - 喜马拉雅：iting://open
    - 支付宝：alipays://platformapi/startapp?appId=20000001
 
+# 四、临时记录
+
+> AutoX.js项目源码，包括在线API文档：[GitHub - kkevsekk1/AutoX: A UiAutomator on android, does not need root access(安卓平台上的JavaScript自动化工具)](https://github.com/kkevsekk1/AutoX)
+>
+> Auto.js源码，方便查看相关API：[Auto.js/WannaCry(仅为娱乐).js at master · hyb1996/Auto.js · GitHub](https://github.com/hyb1996/Auto.js/blob/master/app/src/main/assets/sample/复杂界面/WannaCry(仅为娱乐).js)
+>
+> UI布局的一些组件，参考了【安卓的组件】：[2.2.4 FrameLayout(帧布局) | 菜鸟教程 (runoob.com)](https://www.runoob.com/w3cnote/android-tutorial-framelayout.html)
