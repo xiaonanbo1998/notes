@@ -762,7 +762,7 @@
 
      ```javascript
      store.dispatch('incrementAsync')					//	写法一
-     store.dispatch('incrementAsync', {				//	写法一（载荷）
+     store.dispatch('incrementAsync', {					//	写法一（载荷）
          amount: 10
      })
      store.dispatch({									//	写法二（载荷）
@@ -801,9 +801,300 @@
 
 7. :whale:Module简单介绍
 
-# 六、小知识点
+# 六、组件
 
-1. :ice_cream:$nextTick()函数：
+1. 基本示例
+
+   ```html
+   <div id="app">
+   	<button-counter></button-counter>
+   </div>
+   ```
+
+   ```javascript
+   Vue.component('button-counter', {						//	全局注册
+   	data: function() {
+   		return {
+   			count: 0
+   		}
+   	},
+       template: '<button v-on:click="count++">You clicked me {{ count }} times.</button>'
+   })
+   ```
+
+   - :warning:关于【组件的data】，是一个函数，用来维护每个组件实例的独立拷贝，:book:参考
+
+     > [组件基础 — Vue.js (vuejs.org)](https://cn.vuejs.org/v2/guide/components.html#data-必须是一个函数)
+
+   - :ice_cream:父子组件传值
+
+     ```javascript
+     //	子组件
+     Vue.component('blog-post', {
+         props: ['title'],								//	注意，是【props】
+         template: '<h3>{{ title }}</h3>'
+     })
+     ```
+
+     ```html
+     <!-- 父组件 -->
+     <blog-post title="My hourney with Vue"></blog-post>
+     <blog-post title="Blogging with Vue"></blog-post>
+     <blog-post title="Blogging with Vue"></blog-post>
+     ```
+
+   - :ice_cream:父子组件事件处理
+
+     ```html
+     <!-- 子组件 -->
+     <button v-on:click="$emit('enlarge-text'， 0.1)">				//	触发【enlarge-text】事件，并提供数值
+         Enlarge text
+     </button>
+     ```
+
+     ```html
+     <!-- 父组件，第一种写法 -->
+     <blog-post v-on:enlarge-text="postFontSize += $event"></blog-post>			//	监听【enlarge-text】事件，$event捕获抛出的数值
+     <!-- 第二种写法 -->
+     <blog-post v-on:enlarge-text="onEnlargeText"></blog-post>
+     ```
+
+     ```javascript
+     //	针对第二种写法的js部分
+     methods: {
+         onEnlargeText: function (enlargeAmount) {
+             this.postFontSize += enlargeAmount
+         }
+     }
+     ```
+
+   - 组件使用【v-model】指令
+
+     ```html
+     <!-- 基础实现 -->
+     <input v-model="searchText">
+     <!-- 等价于 -->
+     <input v-bind:value="searchText" v-on:input="searchText = $event.target.value">
+     
+     <!-- 自定义组件 -->
+     <custom-input v-model="searchText"></custom-input>
+     ```
+
+     ```javascript
+     //	自定义组件的定义
+     Vue.component('custom-input', {
+         props: ['value'],
+         template: `<input v-bind:value="value" v-on:input="$emit('input', $event.target.value)"`
+     })
+     ```
+
+   - 组件中的插槽
+
+     ```html
+     <alert-box>Something bad happened.</alert-box>
+     ```
+
+     ```javascript
+     Vue.component('alert-box', {
+         template: '<div class="demo-alert-box>"' +
+         		'	<strong>Error!</strong>' +
+         		'	<slot></slot>'	+
+         		'</div>'
+     })
+     ```
+
+   - 动态组件，:book:参考
+
+     > [组件基础 — Vue.js (vuejs.org)](https://cn.vuejs.org/v2/guide/components.html#动态组件)
+
+2. 深入了解
+
+   - 组件名
+
+     :ice_cream:kebab-case方式/短横线分割命名
+
+     ```javascript
+     Vue.component('my-component-name', { /* ... */ })
+     ```
+
+     :ice_cream:PascalCase方式/首字母大写命名
+
+     ```javascript
+     Vue.component('MyComponentName', { /* ... */ })
+     ```
+
+   - 【全局注册】与【局部注册】
+
+     :ice_cream:全局注册：在任何新建的Vue实例中，都可以使用
+
+     ```javascript
+     Vue.component('my-component-name', { /* ... */ })
+     ```
+
+     :ice_cream:局部注册：全局注册的组件，用【webpack】构建系统时，即使不使用，也会存在于【构建结果中】，额外增加JS开销
+
+     ```javascript
+     var ComponentA = { /* ... */ }
+     new Vue({
+         ele: '#app',
+         components: {
+             'component-a': ComponentA				//	属性名为组件标签名，属性值为组件实例
+         }
+     })
+     
+     //	ES2015模块
+     import ComponentA from './ComponentA.vue'
+     export default({
+         components: {
+             ComponentA								//	简写
+         }
+     })
+     ```
+
+   - Prop
+
+     :ice_cream:类型：1、为组件提供了文档；2、指定类型，遇到类型错误的时候，会在控制台提示用户
+
+     ```javascript
+     props: {
+         title: String,
+     	likes: Number,
+     	isPublished: Boolean,
+     	commentIds: Array,
+     	author: Object,
+     	callback: Function,
+     	contactsPromise: Promise
+     }
+     ```
+
+     :warning:父子组件间，数据【单向下行绑定】，父组件数据更新，子组件数据更新
+
+     :ice_cream:验证：props接收对象
+
+     ```javascript
+     Vue.component('my-component', {
+         props: {
+             propA: [Number, String],						//	基础类型检查，【null】和【undefined】也能通过
+             propB: {
+                 type: String,
+                 required: true,
+                 default: 'demo'								//	必填，且有默认值
+             },
+             propC: {
+                 type: Object,
+                 default: function() {
+                     return { message: 'hello' }
+                 }
+             },
+             propD: {										//	自定义验证函数
+                 validator: function(value) {
+                     return ['success', 'warning', 'danger'].indexOf(value) !== -1
+                 }
+             }
+         }
+     })
+     ```
+
+   - 自定义事件：因为HTML对事件的大小写不敏感，且自动转换为小写，所以自定义事件推荐【kebab-case】的写法
+
+     :ice_cream:原生事件绑定到组件：使用【.native】修饰符
+
+     ```html
+     <base-input v-on:focus.native="onFocus"></base-input>
+     ```
+
+     ```javascript
+     //	如果监听失败，可能不会报错，相应函数也不会执行，通过【$listeners】property解决；它将所有【事件监听器】指向某个property，然后执行相应函数操作
+     Vue.component('base-input', {
+         inheritAttrs: false,				//	除了【label】和【value】之外的attributes，都以【键值对】方式存放在$attrs中
+         props: ['label', 'value'],
+         computed: {
+             inputListeners: function() {
+                 var vm = this
+                 return Object.assign({}, 
+     			this.$listeners,			//	父级添加的所有监听器
+     			{
+                     input: function(event) {		//	自定义监听器，或者覆写监听器
+                         vm.$emit('input', event.target.value)
+                     }
+                 })
+             }
+         },
+         template: '<label> ' +
+         		'{{ label }} ' +
+         		'<input v-bind="$attras" v-bind:value="value" v-on="inputListeners"> ' +
+         		'</label>'
+     })
+     ```
+
+     :ice_cream:.async修饰符：用来解决父子组件间变量的【双向绑定】问题
+
+     ​	:warning:1、【.sync】不能和表达式一起使用；2、【.sync】不能用于【字面量】的对象上，例如：v-bind.sync="{ title: doc.title }"
+
+     ```javascript
+     //	方法一
+     //	子组件
+     this.$emit('update:title', newTitle)
+     //	父组件
+     ```
+
+     ```html
+     <text-document v-bind:title="doc.title" v-on:update:title="doc.title = $event"></text-document>
+     
+     //	方法二
+     <text-document v-bind:title.sync="doc.title"></text-document>
+     ```
+
+     :book:参考
+
+     > [自定义事件 — Vue.js (vuejs.org)](https://cn.vuejs.org/v2/guide/components-custom-events.html#sync-修饰符)
+
+   - 插槽：略
+
+   - 【动态组件】&【异步组件】
+
+   # 七、全局API
+
+   1. Vue.extend(options)
+
+      - 参数：{ Object } options
+
+      - 用法：使用基础Vue构造器，创建一个【子类/组件】；参数是包含【组件选项】的对象，如data、methods、template等等
+
+      - 案例
+
+        ```html
+        <div id="mount-point"></div>
+        ```
+
+        ```javascript
+        //	创建构造器
+        var Profile = Vue.extend({
+            template: '<p>{{firstName}} {{lastName}} aka {{alias}}</p>',
+            data: function() {
+                return {
+                    firstName: 'Walter',
+                    lastName: 'White',
+                    alias: 'Heisenberg'
+                }
+            }
+        })
+        //	实例挂载
+        new Profile.$mount('#mount-point')
+        ```
+
+        ```html
+        <!-- 结果 -->
+        <p>Walter White aka Heisenberg</p>
+        ```
+
+        
+
+   
+
+# 附录、其他
+
+1. $nextTick()函数：
 
    - Vue更新DOM是异步操作，该函数在更新完毕后，进行回调。Vue在观察到数据变化时，不直接更新DOM，而是开启【异步更新队列】，缓冲同一事件中发生的所有数据改变
 
@@ -840,4 +1131,26 @@
    - :book:参考
    
      > [(49条消息) $nextTick()的作用_splx2013的博客-CSDN博客_nexttick](https://blog.csdn.net/splx2013/article/details/107636868)
+   
+2. axios组件：
+
+   - :book:参考
+
+     > [POST 请求 | Axios 中文文档 | Axios 中文网 (axios-http.cn)](https://www.axios-http.cn/docs/post_example)
+   
+3. :warning:组件生命周期
+
+   - created：实例【创建完】之后调用，【数据侦听、计算属性、方法、事件/侦听器的回调】已经完成；【挂载】还没开始且【$el.property】尚不可以用
+
+   - mounted：实例【挂载】之后调用，【el】被创建的【vm.$el】替换；:warning:该周期不会保证所有子组件挂载完成，如果希望等到整个视图渲染完毕，可以使用【vm.$nextTick()函数】
+
+   - beforeDestroy：实例销毁之前调用
+
+   - 其他，:book:参考
+
+     > [API — Vue.js (vuejs.org)](https://cn.vuejs.org/v2/api/#选项-生命周期钩子)
+
+4. :book:官网API
+
+   > [API — Vue.js (vuejs.org)](https://cn.vuejs.org/v2/api/#选项-DOM)
 

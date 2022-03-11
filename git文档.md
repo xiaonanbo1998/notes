@@ -55,6 +55,7 @@
   git reset HEAD <file>	# 回退添加暂存区的文件
   git reset --hard HEAD~1	# 回退一个版本，清除本地仓库的一次提交
   git reset --hard		# 回滚pull操作,清除暂存区/索引区的混乱
+  git reset --hard <version>	# 回退指定的版本号
   ```
 
 - git rebase

@@ -1,3 +1,10 @@
+# 符号注释
+
+- :book:注释
+- :snowflake:一般分类
+- :question:问题
+- :cherry_blossom:其他分类
+
 # 一、环境配置与安装
 
 1. 设置国内镜像源，下载SDK：[(28条消息) Flutter的环境搭建和配置_smxueer的专栏-CSDN博客_flutter环境配置](https://blog.csdn.net/smxueer/article/details/82051118?ops_request_misc=&request_id=&biz_id=102&utm_term=flutter网络环境配置&utm_medium=distribute.pc_search_result.none-task-blog-2~all~sobaiduweb~default-5-82051118.pc_search_all_es&spm=1018.2226.3001.4187)
@@ -119,33 +126,51 @@
 
 5. 如何开发
 
-   1. 创建服务类：继承【AccessibilityService类】，重写【onServiceConnected()】、【onAccessibilityEvent()】和【onInterrupt()】方法
+   1. :snowflake:创建服务类：继承【AccessibilityService类】，重写【onServiceConnected()】、【onAccessibilityEvent()】和【onInterrupt()】方法
 
       - onServiceConnected()：系统成功绑定时触发，一次性，必须
       - onUnbind()：系统关闭服务时触发，一次性，可选
       - onAccessibilityEvent()：监听事件成功则触发，多次，必须
       - onInterrupt()：中断AS反馈时触发，反馈有震动、音频等，即在执行无障碍服务中，服务被中断，则触发此函数，多次，必须
 
-   2. 在【AndroidManifest.xml】声明服务，配置参数
+   2. :snowflake:在【AndroidManifest.xml】声明服务，配置参数
       - 配置【<intent-filter>】
+      
       - 声明【BIND_ACCESSIBILITY_SERVICE】权限
+      
       - 显示服务名字【android:label】
-      - 配置参数方法一：通过【meta-data】标签，指定xml文件进行配置（指定【无障碍服务】处理的事件类型和附加信息，包含在【AccessibilityServiceInfo()类中】）
-      - 配置参数方法二：通过代码，动态配置参数
 
-   3. 跳转无障碍服务，手动开启【无障碍模式】
+      - 配置参数方法一：通过【meta-data】标签，指定xml文件进行配置（指定【无障碍服务】处理的事件类型和附加信息，包含在【AccessibilityServiceInfo()类中】）
+      
+        ```xml
+        <service android:name=".MyAccessibilityService"
+        	android:exported="true"
+        	android:label="@string/accessibility_service_label"
+        	android:permission="android.permission.BIND_ACCESSIBILITY_SERVICE">
+        	<intent-filter>
+        		<action android:name="android.accessibilityservice.AccessibilityService"/>
+        	</intent-filter>
+        	<meta-data
+        		android:name="android.accessibilityservice"
+        		android:resource="@xml/demo_config"/>
+        </service>
+        ```
+      
+      - 配置参数方法二：通过代码，动态配置参数
+      
+   3. :snowflake:跳转无障碍服务，再手动授权【无障碍模式】
 
       ```java
       Intent intent = new Intent(Setting.ACTION_ACCESSIBILITY_SETTING);
       startActivity(intent);
       ```
 
-   4. 处理事件信息
+   4. :snowflake:处理事件信息
 
       - 处理事件信息的函数是【onAccessibilityEvent(AccessibilityEvent event)】
       - 【AccessibilityEvent()类】封装了界面相关事件的信息，根据不同情况，再执行不同操作
 
-   5. 获取节点信息
+   5. :snowflake:获取节点信息
 
       - 通过【AccessibilityNodeInfo()类】，控制节点，进行相关操作
 
@@ -161,13 +186,17 @@
       //	前者有【AccessibilityService()类】，后者有【AccessibilityEvent()类】和【AccessibilityNodeInfo()类】
       ```
 
-6. 案例（[(31条消息) android 辅助功能（无障碍） AccessibilityService 实战入门详解_王能的小屋-CSDN博客_android 无障碍](https://blog.csdn.net/weimingjue/article/details/82744146)）
+6. :book:抢红包案例
 
-7. 【无障碍】参考指南：[Android开发无障碍指南 (siaa.org.cn)](http://www.siaa.org.cn/static/image/img_media/Android无障碍开发指南.pdf)
+   > [(31条消息) android 辅助功能（无障碍） AccessibilityService 实战入门详解_王能的小屋-CSDN博客_android 无障碍](https://blog.csdn.net/weimingjue/article/details/82744146)）
 
-8. API中文解释：【[FLAG_INCLUDE_NOT_IMPORTANT_VIEWS](https://www.apiref.com/android-zh/android/accessibilityservice/AccessibilityServiceInfo.html#FLAG_INCLUDE_NOT_IMPORTANT_VIEWS)】和【[辅助功能 AccessibilityService笔记（2） - 简书 (jianshu.com)](https://www.jianshu.com/p/ef01ce654302)】
+7. :book:【无障碍】参考
 
-9. demo分析
+   > 指南书：[Android开发无障碍指南 (siaa.org.cn)](http://www.siaa.org.cn/static/image/img_media/Android无障碍开发指南.pdf)
+   >
+   > 名词解释：【[FLAG_INCLUDE_NOT_IMPORTANT_VIEWS](https://www.apiref.com/android-zh/android/accessibilityservice/AccessibilityServiceInfo.html#FLAG_INCLUDE_NOT_IMPORTANT_VIEWS)】和【[辅助功能 AccessibilityService笔记（2） - 简书 (jianshu.com)](https://www.jianshu.com/p/ef01ce654302)
+
+8. demo分析
 
    ```java
    //	监听用户操作
@@ -192,33 +221,7 @@
        Log.d(TAG, "应用的包名：" + packageName);
    }
    ```
-   
-10. 个人总结分析
 
-    - 【findAccessibilityNodesInfosByText()函数】：通过【contains】包含关键字的方式，匹配【desc】和【text】字段，找到节点
-    - 【performAction()函数】：根据【clickable字段】进行点击
-    - 用户的手势操作，需要额外的权限：【android:canPerformGestures="true"】
-    - 关于【event.getSource()】和【getRootInActiveWindow()】，混合使用，区别暂时未知？？？
-    
-11. 引入【无障碍】的两种方式（特指安卓端）
-
-    - 在【安卓端】，直接编写安卓端的【Service】，可以成功运行
-
-    - 在【第三方包】的【安卓端】，编写安卓端的【Service】，引入【第三方包】的依赖，可以成功运行
-
-      ```dart
-      //	引入第三方包中的类
-      import 'package:hello/hello.dart'
-      //	引入同目录下的类
-      import 'hello.dart'
-      ```
-
-      ```java
-      //	引入同目录下的类，不需要引入，直接调用
-      Alipay().searchVip()
-      ```
-
-      
 
 # 六、关于安卓项目（四大组件，五大布局，六大存储）
 
@@ -231,7 +234,7 @@
 
 2. 无障碍的几个类的总结
 
-   - AccessibilityService类：用来继承，重写【连接】、【监听】和【中断】三大函数
+   - :snowflake:AccessibilityService类：用来继承，重写【连接】、【监听】和【中断】三大函数
    - getRootInActiveWindow()：获取窗口根节点，返回单个节点
    - performGlobalAction(action)：全局操作，无关当前环境
      1. GLOBAL_ACTION_HOME：home键
@@ -246,7 +249,7 @@
      6. canPerformGestures：允许模拟手势的API实现
      7. description：简单描述无障碍
      8. notificationTimeout：两个辅助功能事件之间的最小间隔周期，一般设置100
-   - AccessibilityEvent类：封装界面传递的事件信息
+   - :snowflake:AccessibilityEvent类：封装界面传递的事件信息
      1. getEventType()：事件类型
         - TYPE_NOTIFICATION_STATE_CHANGED：通知弹出
         - TYPE_WINDOW_STATE_CHANGED：dialog等用户界面变化
@@ -293,7 +296,7 @@
 
 5. build.gradle初步学习
 
-   - Gradle是基于Groovy的【领域特定语言/DSL】（注：DSL是帮助用户从某个系统中，抽象出部分功能或者简化某些操作，的一种工具），用来声明项目设置并构建项目，而不是用原来的XML（注：ANT或者Maven，是基于XML的DSL）进行配置
+   - Gradle是基于Groovy的【领域特定语言/DSL】（注：DSL是帮助用户从某个系统中，抽象出部分功能或者简化某些操作的一种工具），用来声明项目设置并构建项目，而不是用原来的XML（注：ANT或者Maven，是基于XML的DSL）进行配置
 
    - 项目中一般出现2个或者多个，一个在【根目录】下，一个在【app目录】下；如果在【Android模式下】，则全部在【Gradle Scripts】文件下
 
@@ -359,5 +362,8 @@
 
    - 注：Android有两个标准的library文件服务器，一个是【jcenter】，另一个是【maven】，两者没有关系；jcenter有的maven可能没有，反之亦然
 
-### 
+# 附录
+
+1. :cherry_blossom:快捷键
+  - Alt+Ctrl+L：格式化代码
 
