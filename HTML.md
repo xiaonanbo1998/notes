@@ -97,7 +97,7 @@
 
 4. 伪元素的使用
 
-   - 清除浮动
+   - :ice_cream:清除浮动
 
      ```css
      ul:after {
@@ -113,7 +113,9 @@
      .clearfix:after {clear: both;}
      ```
 
-   - 制作三角形
+     
+
+   - :ice_cream:制作【三角形图标/ICON】
 
      ```css
      .demo:after{
@@ -123,11 +125,37 @@
          height: 0;
          border: 8px solid transparent;
          border-left: 8px solid #AFABAB;
-         position: relative;
+         position: relative;							/* 设置三角形在字体右侧一段距离 */
          top: 2px;
          left: 10px;
      }
      ```
+     
+     
+     
+   - :ice_cream:制作【按钮的交互】
+
+     ```css
+     .demo {
+         width: 100px;
+         height: 30px;
+         line-height: 30px;
+         text-align: center;
+         background-color: Skyblue;
+         border-radius: 10px;
+         
+         cursor: pointer;				/* 设置鼠标样式 */
+     }
+     .demo:hover {
+         background-color: Pink;			/* 鼠标在上方时候的样式 */
+     }
+     .demo:active {
+         background-color: DarkOrange;	/* 鼠标点击时候的样式 */
+     }					
+     .demo:visited {}					/* 针对a标签，被点击后的样式 */
+     ```
+
+     
 
 5. 备注
 
