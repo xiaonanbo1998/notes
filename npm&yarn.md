@@ -1,9 +1,26 @@
-# 零、基础理解
+# 零、表情符号
+
+- :lemon:一般分类
+- :book:参考
+
+# 一、基础理解
 
 1. yarn和npm，两者都是对【Node.js】运行环境中【包/模块/依赖】的管理
-2. :question:【Node.js】是运行在服务端的JS（环境）
 
-# 一、常用指令
+2. 【Node.js】是运行在服务端的JS（环境）
+
+3. 版本验证
+
+   ```bash
+   #	node版本
+   node -v
+   #	npm版本
+   npm -v
+   ```
+
+   
+
+# 二、常用指令
 
 ```shell
 #	安装
@@ -24,7 +41,7 @@ yarn || yarn install	#	install all the dependencies
 yarn upgrade [package]	#	upgrade package to the latest version and update [package.json]
 ```
 
-# 二、关于package.json
+# 三、关于package.json
 
 1. 了解：一个记录文件，管理npm依赖包
 
@@ -38,7 +55,7 @@ yarn upgrade [package]	#	upgrade package to the latest version and update [packa
    npm set init.author.email "wombat@npmjs.com"			//	手动设置初始化参数
    ```
 
-   - :notebook_with_decorative_cover:tips：如果文件中中没有描述字段，package.json就会使用README.md或README 的第一行。该描述可帮助人们在搜索npm时找到您的包，因此在package.json中写入自定义描述，可以让人更容易找到包。
+   - :book:tips：如果文件中中没有描述字段，package.json就会使用【README.md】的第一行。该描述可帮助人们在搜索npm时找到您的包，因此在package.json中写入自定义描述，可以让人更容易找到包。
    
 3. 两种类型的【依赖包列表】
 
@@ -62,19 +79,20 @@ yarn upgrade [package]	#	upgrade package to the latest version and update [packa
    - 安装方式
 
      ```shell
-     npm install packageName --save		//	添加到dependencies
+     npm install packageName --save		//	添加到dependencies，或者是--saveDev
      npm install packageName -S			//	abbreviation
      npm install packageName --save-dev	//	添加到devDependencies
      npm install packageName -D			//	abbreviation
      
-     npm i moduleName					//	安装模块到项目目录下
+     npm i moduleName					//	安装模块到项目目录下（dependencies节点中）
      npm i install -g moduleName			//	安装模块到全局，npm config prefix查看
      ```
 
      1. :lemon:npm i moduleName
         - 安装模块到【node_modules】目录下
-        - 不会将模块依赖写入两个节点
-        - 运行【npm i】初始化项目时，不会下载模块
+        - 将模块依赖写入【dependencies】节点中
+        - 运行【npm i】初始化项目时，会下载模块
+        - 运行【npm i --production】或者注明【NODE_ENV】值为【production】时，会自动下载模块
      2. :lemon:npm i -g moduleName
         - 全局安装，不会在【node_modules】目录下
         - 不会将模块依赖写入两个节点
@@ -93,8 +111,10 @@ yarn upgrade [package]	#	upgrade package to the latest version and update [packa
 4. 参考
 
    > 关于package.json：[npm关于package.json安装的那些事 - SegmentFault 思否](https://segmentfault.com/a/1190000017552119)
+   >
+   > JavaScript学习指南（第三版）
 
-# 三、附录
+# 附录
 
 > yarn和npm对比：[Yarn vs npm：你需要知道的一切 - 知乎 (zhihu.com)](https://zhuanlan.zhihu.com/p/23493436#:~:text=npm install 命令安装的是 package.json 中的依赖，如果开发者在 package.json 中添加了新的依赖，npm install,也一样安装。 然而，yarn install 会优先安装 yarn.lock 中记录的依赖，没有这样的锁定文件时，才会去安装 package.json 中的依赖。)
 >
