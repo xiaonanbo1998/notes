@@ -109,3 +109,7 @@
    > 插件：[利用Gulp实现前端打包自动上传服务器 - 云+社区 - 腾讯云 (tencent.com)](https://cloud.tencent.com/developer/article/1653701)
    >
    > 插件：[gulp gulp-sftp 上传服务器 - 简书 (jianshu.com)](https://www.jianshu.com/p/cbbfccfde747)
+   >
+   > :snowflake:常用插件列表：[gulp常用插件汇总 - 较瘦 - 博客园 (cnblogs.com)](https://www.cnblogs.com/jiaoshou/p/12003709.html)
+   >
+   > :snowflake:gulp系统学习：[(55条消息) gulp构建项目（一）：环境准备及项目基础结构搭建_猿始森林的博客-CSDN博客_gulp项目](https://blog.csdn.net/guang_s/article/details/84664769)

@@ -16,9 +16,17 @@
    node -v
    #	npm版本
    npm -v
+   #	当前目录依赖，ls = list
+   npm ls --dept 0
+   #	全局依赖
+   npm ls -g --dept 0
+   #	查看具体某项依赖
+   npm ls <packagename> [--dept 0]
    ```
-
    
+4. :book:参考
+
+   > 查看依赖：[npm查看全局安装过哪些包(插件)_03251108的技术博客_51CTO博客](https://blog.51cto.com/u_11871779/2287392)
 
 # 二、常用指令
 
