@@ -3,7 +3,6 @@
 - :book:注释
 - :snowflake:一般分类
 - :question:问题
-- :cherry_blossom:其他分类
 
 # 一、环境配置与安装
 
@@ -362,8 +361,60 @@
 
    - 注：Android有两个标准的library文件服务器，一个是【jcenter】，另一个是【maven】，两者没有关系；jcenter有的maven可能没有，反之亦然
 
+# 七、video_player组件
+
+1. 简介：官方提供的播放视频的依赖/组件
+
+2. 主要类
+
+   ```dart
+   //	VideoPlayer，视频【组件】，通过【VideoPlayerController】初始化
+   VideoPlayer(_controller)
+   //	VideoPlayerController，控制视频的实例对象，常用于加载视频源，视频的播放/暂停，以及相关事件监听
+   VideoPlayerController _controller;
+   //	VideoProgressIndicator，视频的进度条【组件】，通过【VideoPlayerController】初始化
+   VideoProgressIndicator(_controller, allowScrubbing: true)
+   ```
+
+3. 情况（针对单个视频）
+
+   - :snowflake:能够【https】和【http】请求资源
+   - :snowflake:能够手动暂停/播放，设置加速播放，设置循环播放
+   - :snowflake:能够展示进度条，拖拽播放
+   - :question:横屏情况，展示有问题，可能是装视频的组件有问题
+   - :question:多个视频的相关测试，情况未知
+
+4. :book:参考信息
+
+   > 库地址：[video_player | Flutter Package (pub.dev)](https://pub.dev/packages/video_player)
+   >
+   > 简单使用，以及三方组件的UI封装：[Flutter 视频播放 - 简书 (jianshu.com)](https://www.jianshu.com/p/caf7e3cd0df6)
+   >
+   > 网络权限配置，http网络请求：[(55条消息) Flutter视频播放、Flutter VideoPlayer 视频播放组件精要_早起的年轻人的博客-CSDN博客_flutter 视频播放](https://blog.csdn.net/zl18603543572/article/details/111327310)
+   >
+   > 进度条设置：[(54条消息) flutter video 支持拖动加载，单击可以暂停。_我来秋风扫落叶的博客-CSDN博客](https://blog.csdn.net/qq_15038701/article/details/97826132)
+   >
+   > 在线MP4视频资源：[MP4视频测试地址在线MP4文件 - 简书 (jianshu.com)](https://www.jianshu.com/p/34ce7f9b469a)
+
+# 八、audioplayers组件
+
+1. 简介
+
+2. 主要方法
+
+3. :book:参考信息
+
+   > 库地址：[audioplayers | Flutter Package (pub.dev)](https://pub.dev/packages/audioplayers)
+   >
+   > 网络权限和http请求配置：[(55条消息) Flutter视频播放、Flutter VideoPlayer 视频播放组件精要_早起的年轻人的博客-CSDN博客_flutter 视频播放](https://blog.csdn.net/zl18603543572/article/details/111327310)
+   >
+   > 完整介绍和使用实现：[flutter -- 音频播放 audioplayers - 简书 (jianshu.com)](https://www.jianshu.com/p/288f869690f0)
+
 # 附录
 
-1. :cherry_blossom:快捷键
-  - Alt+Ctrl+L：格式化代码
+1. :snowflake:快捷键
+   - Alt+Ctrl+L：格式化代码
+2. 在线MP4资源：[MP4视频测试地址在线MP4文件 - 简书 (jianshu.com)](https://www.jianshu.com/p/34ce7f9b469a)
+
+
 
