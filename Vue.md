@@ -1053,42 +1053,81 @@
 
    - 【动态组件】&【异步组件】
 
-   # 七、全局API
+# 七、全局API
 
-   1. Vue.extend(options)
+1. Vue.extend(options)
 
-      - 参数：{ Object } options
+   - 参数：{ Object } options
 
-      - 用法：使用基础Vue构造器，创建一个【子类/组件】；参数是包含【组件选项】的对象，如data、methods、template等等
+   - 用法：使用基础Vue构造器，创建一个【子类/组件】；参数是包含【组件选项】的对象，如data、methods、template等等
 
-      - 案例
+   - 案例
 
-        ```html
-        <div id="mount-point"></div>
-        ```
+     ```html
+     <div id="mount-point"></div>
+     ```
 
-        ```javascript
-        //	创建构造器
-        var Profile = Vue.extend({
-            template: '<p>{{firstName}} {{lastName}} aka {{alias}}</p>',
-            data: function() {
-                return {
-                    firstName: 'Walter',
-                    lastName: 'White',
-                    alias: 'Heisenberg'
-                }
-            }
-        })
-        //	实例挂载
-        new Profile.$mount('#mount-point')
-        ```
+     ```javascript
+     //	创建构造器
+     var Profile = Vue.extend({
+         template: '<p>{{firstName}} {{lastName}} aka {{alias}}</p>',
+         data: function() {
+             return {
+                 firstName: 'Walter',
+                 lastName: 'White',
+                 alias: 'Heisenberg'
+             }
+         }
+     })
+     //	实例挂载
+     new Profile.$mount('#mount-point')
+     ```
 
-        ```html
-        <!-- 结果 -->
-        <p>Walter White aka Heisenberg</p>
-        ```
+     ```html
+     <!-- 结果 -->
+     <p>Walter White aka Heisenberg</p>
+     ```
 
-        
+     
+
+# 八、过滤器
+
+1. 局部/本地过滤器
+
+   ```vue
+   //	使用方式两种，【插值表达式】和【v-bind指令】中
+   <div v-bind:title="title | filter">{{ message | filter }}</div>
+   //	定义
+   filters: {
+   	filter(value) {
+   		if(!value) return ''
+   		return value.charAt(0).toUpperCase() + value.slice(1)
+   	}
+   }
+   ```
+
+   - :ice_cream:可以多个过滤器串联
+
+     ```vue
+     <div>{{ message | filterA | filterB }}</div>
+     ```
+
+     
+
+   - :ice_cream:过滤器可以带参数，filter函数定义中则有【两个】参数，一个是message，另一个是para
+
+     ```vue
+     <div>{{ message | filter(para) }}</div>
+     ```
+
+2. 全局过滤器
+
+   ```
+   Vue.filter('capitalize', function (value) {
+   	if (!value) return ''
+   	return value.charAt(0).upUpperCase() + value.slice(1)
+   })
+   ```
 
    
 

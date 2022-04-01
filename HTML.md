@@ -368,3 +368,68 @@
 2. :book:参考
 
    > [CSS backdrop-filter实现背景毛玻璃效果-码云笔记 (mybj123.com)](https://www.mybj123.com/5041.html)
+
+# 八、播放器（Vue和JS，兼容性好）
+
+1. 关键点
+
+   - 纯CSS，有两个属性控制【暂停】和【播放】的动画
+
+     ```css
+     .play {
+         //	继续播放
+         animation-play-state: running;
+     }
+     .pause {
+         //	暂停播放
+         animation-play-state: paused;
+     }
+     ```
+
+   - JS手动计算每秒甚至每毫秒的旋转角度
+
+2. 实现方式
+
+   ```vue
+   <template>
+       <div id="app">
+           <img class="player" src="/icon-player.jpeg" ref="cover" alt="占位图" title="播放器▶" />
+           <div class="btn" @click="playAndPause">{{ icon }}</div>
+       </div>
+   </template>
+   
+   <script>
+       new Vue({
+           el: "#app",
+           data() {
+               return {
+                   icon: "▶",
+                   degree: 0,
+               };
+           },
+           methods: {
+               //	setInterval和degreen控制旋转速度，注意【每秒旋转角度】和【显示器刷新率】
+               doRotate() {
+                   let timeId = setInterval(() => {
+                       if (this.icon == "▶") clearInterval(timeId);
+                       this.degree = (this.degree + 0.3) % 360;
+                       this.$refs.cover.style.cssText = "transform: rotate(" + this.degree + "deg)";
+                   }, 16);
+               },
+               //	切换图标，播放/停止动画
+               playAndPause() {
+                   this.icon = this.icon == "▶" ? "||" : "▶";
+                   this.doRotate();
+               },
+           },
+       });
+   </script>
+   ```
+
+3. :book:参考
+
+   > CSS控制，和JS控制：[CSS/JS：如何实现动画的暂停和播放 - 知乎 (zhihu.com)](https://zhuanlan.zhihu.com/p/103513500)
+   >
+   > 关于【帧率】和【刷新率】问题：[帧率和刷新率入门到圣堂 - 知乎 (zhihu.com)](https://zhuanlan.zhihu.com/p/413442493)
+   >
+   > 关于JS修改CSS样式：[JS设置CSS样式的几种方式 - LiuWeiLong - 博客园 (cnblogs.com)](https://www.cnblogs.com/LiuWeiLong/p/6058059.html)
