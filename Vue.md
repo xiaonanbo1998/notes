@@ -1189,7 +1189,29 @@
 
      > [API — Vue.js (vuejs.org)](https://cn.vuejs.org/v2/api/#选项-生命周期钩子)
 
-4. :book:官网API
+4. :warning:关于Uniapp的【uni.$emit】、【uni.$on】和【uni.$off】
+
+   - uni.$on('event-name', functionName)，这里的只需要【functionName】，不需要加上括号
+
+     ```javascript
+     function fn() {					//	声明或定义
+         //	code...
+     }
+     fn()							//	调用
+     uni.$on('event-name', fn)		//	只需要函数名称，即函数声明或定义
+     ```
+
+   - uni.$off('event-name', functionName)
+
+     :ice_cream:没有参数，移除所有的事件监听器，不限于某个组件
+
+     :ice_cream:只提供了事件，移除该事件的所有监听器，不限于某个组件
+
+     :ice_cream:同时提供了事件和回调函数，移除该回调的监听器，即移除该组件的该事件的监听器
+
+     :ice_cream:提供的回调必须跟$on的回调必须为同一个才能移除这个回调的监听器
+
+5. :book:官网API
 
    > [API — Vue.js (vuejs.org)](https://cn.vuejs.org/v2/api/#选项-DOM)
 
