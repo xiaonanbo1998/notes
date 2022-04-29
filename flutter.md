@@ -28,12 +28,20 @@
 
 2. 常用指令
 
-   ```dart
+   ```powershell
    flutter run			//	运行项目
    flutter pub get		//	获取依赖项
+   flutter upgrade		//	升级SDK
+   flutter channel beta	//	切换到beta版本，一共有beta、stable、master版本
    ```
    
-3. 生命周期：[[Flutter\] 10-Flutter的生命周期 - 简书 (jianshu.com)](https://www.jianshu.com/p/6ed6f7de01ff)
+3. :book:参考
+
+   > 生命周期：[[Flutter\] 10-Flutter的生命周期 - 简书 (jianshu.com)](https://www.jianshu.com/p/6ed6f7de01ff)
+   >
+   > SDK升级：[升级你的 Flutter 版本 | Flutter 中文文档 | Flutter 中文开发者网站](https://flutter.cn/docs/development/tools/sdk/upgrading)
+   >
+   > 代理配置，镜像网站：[在中国网络环境下使用 Flutter | Flutter 中文文档 | Flutter 中文开发者网站](https://flutter.cn/community/china)
 
 # 三、第三方插件库
 
@@ -414,7 +422,14 @@
 
 1. :snowflake:快捷键
    - Alt+Ctrl+L：格式化代码
+   
 2. 在线MP4资源：[MP4视频测试地址在线MP4文件 - 简书 (jianshu.com)](https://www.jianshu.com/p/34ce7f9b469a)
+
+3. :snowflake:参考书
+
+   > 《Flutter实战-第二版》：https://book.flutterchina.club/chapter3/img_and_icon.html
+   >
+   > flutter_swiper插件：[flutter_swiper | Flutter Package (flutter-io.cn)](https://pub.flutter-io.cn/packages/flutter_swiper)
 
 
 
