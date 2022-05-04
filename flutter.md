@@ -4,36 +4,20 @@
 - :snowflake:一般分类
 - :question:问题
 
-# 一、环境配置与安装
-
-1. 设置国内镜像源，下载SDK：[(28条消息) Flutter的环境搭建和配置_smxueer的专栏-CSDN博客_flutter环境配置](https://blog.csdn.net/smxueer/article/details/82051118?ops_request_misc=&request_id=&biz_id=102&utm_term=flutter网络环境配置&utm_medium=distribute.pc_search_result.none-task-blog-2~all~sobaiduweb~default-5-82051118.pc_search_all_es&spm=1018.2226.3001.4187)
-   - cmd中，输入第一句：set PUB_HOSTED_URL=https://pub.flutter-io.cn
-   - cmd中，输入第二句：set FLUTTER_STORAGE_BASE_URL=https://storage.flutter-io.cn
-   - 克隆SDK文件：git clone https://github.com/flutter/flutter.git -b stable
-     - 出现【unable to access 'https://...'】的问题，关闭代理：git config --global --unset https.proxy（[(28条消息) 完美解决 fatal: unable to access 'https://github.com/.../.git': Could not resolve host: github.com_桃九醉的博客-CSDN博客](https://blog.csdn.net/qq_38415505/article/details/83687207)）
-2. 设置path环境变量，重启所有命令行窗口，包括VS Code，再运行【flutter doctor】：[1. 安装和环境配置 - Windows - 《Flutter 1.12 官方开发文档》 - 书栈网 · BookStack](https://www.bookstack.cn/read/flutter-1.2-zh/c02f8b2ba3dcc1ae.md)
-   - 设置【用户变量】中的【path】：C:\Users\Aijiar\Desktop\flutter\bin
-   - 运行【flutter doctor】：当开发者们从 GitHub 安装（而不是从预打包的归档文件中安装），为了要执行 `flutter` 命令，Flutter 工具将会在首次运行时从谷歌服务器下载 Dart SDK。升级 Flutter 时亦会发生 (比如运行 `flutter upgrade` 命令) 
-   - ![image-20211020111229527](C:\Users\zyc\AppData\Roaming\Typora\typora-user-images\image-20211020111229527.png)
-   - 安装【Android Studio】和【Android SDK】：【[(28条消息) Android Studio安装配置详细步骤（超详细）_『愚』的博客-CSDN博客_android studio安装](https://keafmd.blog.csdn.net/article/details/108942788)】和【[(28条消息) cmdline-tools component is missing_吃饭了吗的博客-CSDN博客](https://blog.csdn.net/weixin_41824429/article/details/118942087?ops_request_misc=&request_id=&biz_id=&utm_medium=distribute.pc_search_result.none-task-blog-2~all~es_rank~default-1-118942087.pc_search_all_es&utm_term=cmdline-tools+component+is+mis&spm=1018.2226.3001.4187)】
-3. 安装【VS Code】以及对应的插件：（[Flutter 中文文档 - Flutter 中文资源 | 编辑工具设定](https://flutter.cn/docs/get-started/editor?tab=vscode)）
-   - 安装【Dart】和【Flutter】插件
-   - 打开【查看】——【命令面板】，输入【doctor】，选择【Flutter: Run Flutter Doctor】，查看输出
-4. 通过模板，实现Demo
-   - 注意：文件名最好使用【my_app】形式（[dart/flutter 中的代码规范 - 简书 (jianshu.com)](https://www.jianshu.com/p/047eb78dce53)）
-
-# 二、Flutter知识
+# 一、Flutter指令 及框架
 
 1. 参考文章：[(28条消息) Flutter常用命令行_大灰狼的小绵羊哥哥的博客-CSDN博客_flutter 命令](https://blog.csdn.net/sinat_17775997/article/details/106418282)
 
 2. 常用指令
 
-   ```powershell
+   ```git
    flutter run			//	运行项目
    flutter pub get		//	获取依赖项
    flutter upgrade		//	升级SDK
    flutter channel beta	//	切换到beta版本，一共有beta、stable、master版本
    ```
+   
+   
    
 3. :book:参考
 
@@ -42,12 +26,65 @@
    > SDK升级：[升级你的 Flutter 版本 | Flutter 中文文档 | Flutter 中文开发者网站](https://flutter.cn/docs/development/tools/sdk/upgrading)
    >
    > 代理配置，镜像网站：[在中国网络环境下使用 Flutter | Flutter 中文文档 | Flutter 中文开发者网站](https://flutter.cn/community/china)
+   >
+   > 第三方插件库：[Flutter第三方插件汇总（持续更新） - 掘金 (juejin.cn)](https://juejin.cn/post/6874082988381241357#heading-20)
 
-# 三、第三方插件库
+# 二、第一个Flutter应用
 
-1. 参考文章：[Flutter第三方插件汇总（持续更新） - 掘金 (juejin.cn)](https://juejin.cn/post/6874082988381241357#heading-20)
+1. 计数器应用示例
 
-# 四、Packages的开发和提交
+2. Widget简介
+
+3. 状态管理
+
+4. :book:参考
+
+   > Flutter实战-第二版：[Flutter第三方插件汇总（持续更新） - 掘金 (juejin.cn)](https://juejin.cn/post/6874082988381241357#heading-20)
+
+# 三 、布局类组件
+
+1. 组件分类
+
+   |            Widget             |       说明       |                             用途                             |
+   | :---------------------------: | :--------------: | :----------------------------------------------------------: |
+   |    LeafRenderObjectWidget     | 非容器类组件基类 | Widget树的叶子节点，没有子节点，通常基础组件都属于这一类，如Image |
+   | SingleChildRenderObjectWidget |   单子组件基类   |      包含一个子组件，如：ConstrainedBox、DecoratedBox等      |
+   | MultiChildRenderObjectWidget  |   多子组件基类   | 多个子组件，一般都有一个children参数，接受一个Widget数组，如：Row、Column、Stack等 |
+
+2. :snowflake:两种布局模型
+
+   - 基于【RenderBox】的盒模型布局
+   - 基于【RenderSliver/Sliver】的按需加载列表布局
+
+3. 盒模型的约束组件
+
+4. 线性布局（Row和Column）
+
+   - 主轴方向，尽可能大；纵轴方向取决于子元素长度
+   - 嵌套使用时，里面的【Row/Column】占用的空间大小为实际大小
+
+5. 弹性布局（Flex、Expanded、Row和Column）
+
+6. 流式布局（Wrap和Flow）
+
+7. 层叠布局（Stack和Positioned）
+
+   - 【Stack组件】，允许子组件堆叠；【Posintioned】，根据Stack四个角确定子组件位置
+   - 【Align组件】通过【Alignment类和FractionalOffset类】计算偏移
+
+# 四、容器类组件
+
+1. 填充（Padding）
+2. 装饰容器（DecoratedBox）
+3. 变换（Transform）
+4. 普通容器（Container）
+5. 剪裁（Clip）
+6. 空间适配 （FittedBox）
+7. 默认容器（Scaffold）
+
+# 五、可滚动组件
+
+# 三、Packages的开发和提交
 
 1. 【Packages】和【插件/plugin】区别
    - 【plugin】是【package】的一种，全称是【plugin package】，简称【插件/plugin】
@@ -98,7 +135,7 @@
 
    
 
-# 五、无障碍服务
+# 四、无障碍服务
 
 1. 概括：简单说，就是一个后台监控服务，根据监控内容，调用后台的回调方法
    
@@ -230,7 +267,7 @@
    ```
 
 
-# 六、关于安卓项目（四大组件，五大布局，六大存储）
+# 五、关于安卓项目（四大组件，五大布局，六大存储）
 
 1. 安卓四大组件
 
@@ -369,7 +406,7 @@
 
    - 注：Android有两个标准的library文件服务器，一个是【jcenter】，另一个是【maven】，两者没有关系；jcenter有的maven可能没有，反之亦然
 
-# 七、video_player组件
+六、video_player组件
 
 1. 简介：官方提供的播放视频的依赖/组件
 
@@ -404,7 +441,7 @@
    >
    > 在线MP4视频资源：[MP4视频测试地址在线MP4文件 - 简书 (jianshu.com)](https://www.jianshu.com/p/34ce7f9b469a)
 
-# 八、audioplayers组件
+# 六、audioplayers组件
 
 1. 简介
 
