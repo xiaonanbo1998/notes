@@ -39,7 +39,7 @@
 
 4. :book:参考
 
-   > Flutter实战-第二版：[Flutter第三方插件汇总（持续更新） - 掘金 (juejin.cn)](https://juejin.cn/post/6874082988381241357#heading-20)
+   > Flutter实战-第二版：[第二版序 | 《Flutter实战·第二版》 (flutterchina.club)](https://book.flutterchina.club/)
 
 # 三 、布局类组件
 
@@ -77,12 +77,74 @@
 1. 填充（Padding）
 2. 装饰容器（DecoratedBox）
 3. 变换（Transform）
-4. 普通容器（Container）
+4. 普通多组合容器（Container）
 5. 剪裁（Clip）
 6. 空间适配 （FittedBox）
 7. 默认容器（Scaffold）
 
 # 五、可滚动组件
+
+1. 可滚动组件简介
+
+   - 可滚动的组成
+
+     :snowflake:Scrollable：处理滑动手势，确定滑动偏移，偏移时构建Viewport
+
+     :snowflake:Viewport：显示的视窗，即列表的可视区域
+
+     :snowflake:Sliver：视窗里显示的元素
+
+   - ScrollController：配置controller属性，控制可滚动组件的滚动
+
+   - Scrollbar：Material风格的滚动指示器/滚动条
+
+2. SingleChildScrollView：在期望内容不会超出屏幕太多使用
+
+3. ListView
+
+   - 默认构造函数：适用于少量组件
+   - ListView.builder：适用于多项组件，按需加载
+   - ListView.separated：生成的列表项之间添加一个分割组件
+
+4. 滚动监听及控制
+
+   - ScrollController：控制滚动的类
+
+5. AnimatedList
+
+   - AnimatedList：在列表中插入或删除节点时，执行一个动画
+
+6. GridView
+
+7. PageView与页面缓存
+
+   - PageView：实现页面切换和Tab布局
+   - 页面缓存
+
+8. 可滚动组件子项缓存KeepAlive
+
+9. TabBarView
+
+10. CustomScrollView和Slivers
+
+    |        Sliver名称         |                功能                |       对应的可滚动组件        |
+    | :-----------------------: | :--------------------------------: | :---------------------------: |
+    |        SliverList         |                列表                |           ListView            |
+    |   SliverFixedExtentList   |           高度固定的列表           |  ListView，指定itemExtent时   |
+    |    SliverAnimatedList     |    添加/删除列表项可以执行动画     |         AnimatedList          |
+    |        SliverGrid         |                网格                |           GridView            |
+    | SliverPrototypeExtentList |     根据原型生成高度固定的列表     | ListView，指定prototypeItem时 |
+    |    SliverFillViewport     | 包含多个子组件，每个都可以填满屏幕 |           PageView            |
+
+    - CustomScrollView 组合 Sliver 的原理是为所有子 Sliver 提供一个共享的 Scrollable，然后统一处理指定滑动方向的滑动事件
+    - CustomScrollView 和 ListView、GridView、PageView 一样，都是**完整**的可滚动组件（同时拥有 Scrollable、Viewport、Sliver）
+    - CustomScrollView 只能组合 Sliver，如果有孩子也是一个**完整**的可滚动组件（通过 SliverToBoxAdapter 嵌入）且它们的滑动方向一致时便不能正常工作
+
+11. 自定义Sliver
+
+12. 嵌套可滚动组件NestedScrollView
+
+    - NestedScrollView整体是一个CustomScrollView（的子类）
 
 # 三、Packages的开发和提交
 
@@ -467,6 +529,18 @@
    > 《Flutter实战-第二版》：https://book.flutterchina.club/chapter3/img_and_icon.html
    >
    > flutter_swiper插件：[flutter_swiper | Flutter Package (flutter-io.cn)](https://pub.flutter-io.cn/packages/flutter_swiper)
+
+# 问题
+
+- 访问阿帕奇仓库失败
+
+  :snowflake:最新的国内镜像网站：[(16条消息) package命令报错Connect to repo.maven.apache.org:443 [repo.maven.apache.org/151.101.52.215\]_→_→BéLieve的博客-CSDN博客](https://blog.csdn.net/weixin_46099269/article/details/107665484)
+
+  :snowflake:阿里云Maven镜像：[仓库服务 (aliyun.com)](https://developer.aliyun.com/mvn/guide)
+
+  :snowflake:配置方式：[Could not resolve all artifacts for configuration ':classpath'. - 谜语+ - 博客园 (cnblogs.com)](https://www.cnblogs.com/022414ls/p/13469136.html)
+
+  :snowflake:gradle理解：[(16条消息) 【Android】解决Kotlin依赖无法下载的问题_midnight_time的博客-CSDN博客](https://blog.csdn.net/midnight_time/article/details/104449443)
 
 
 
