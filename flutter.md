@@ -100,6 +100,8 @@
 
 2. SingleChildScrollView：在期望内容不会超出屏幕太多使用
 
+   > :book:案例：[Flutter SingleChildScrollView 滚动控件 - 云+社区 - 腾讯云 (tencent.com)](https://cloud.tencent.com/developer/article/1695398)
+
 3. ListView
 
    - 默认构造函数：适用于少量组件
@@ -146,7 +148,7 @@
 
     - NestedScrollView整体是一个CustomScrollView（的子类）
 
-# 三、Packages的开发和提交
+# 六、Packages的开发和提交
 
 1. 【Packages】和【插件/plugin】区别
    - 【plugin】是【package】的一种，全称是【plugin package】，简称【插件/plugin】
@@ -197,7 +199,7 @@
 
    
 
-# 四、无障碍服务
+# 七、无障碍服务
 
 1. 概括：简单说，就是一个后台监控服务，根据监控内容，调用后台的回调方法
    
@@ -329,7 +331,7 @@
    ```
 
 
-# 五、关于安卓项目（四大组件，五大布局，六大存储）
+# 八、关于安卓项目（四大组件，五大布局，六大存储）
 
 1. 安卓四大组件
 
@@ -503,7 +505,7 @@
    >
    > 在线MP4视频资源：[MP4视频测试地址在线MP4文件 - 简书 (jianshu.com)](https://www.jianshu.com/p/34ce7f9b469a)
 
-# 六、audioplayers组件
+# 九、audioplayers组件
 
 1. 简介
 
@@ -519,7 +521,7 @@
 
 # 附录
 
-1. :snowflake:快捷键
+1. 快捷键
    - Alt+Ctrl+L：格式化代码
    
 2. 在线MP4资源：[MP4视频测试地址在线MP4文件 - 简书 (jianshu.com)](https://www.jianshu.com/p/34ce7f9b469a)
@@ -532,15 +534,34 @@
 
 # 问题
 
-- 访问阿帕奇仓库失败
+1. 访问阿帕奇仓库失败
 
-  :snowflake:最新的国内镜像网站：[(16条消息) package命令报错Connect to repo.maven.apache.org:443 [repo.maven.apache.org/151.101.52.215\]_→_→BéLieve的博客-CSDN博客](https://blog.csdn.net/weixin_46099269/article/details/107665484)
+  - :snowflake:最新的国内镜像网站：[(16条消息) package命令报错Connect to repo.maven.apache.org:443 [repo.maven.apache.org/151.101.52.215\]_→_→BéLieve的博客-CSDN博客](https://blog.csdn.net/weixin_46099269/article/details/107665484)
 
-  :snowflake:阿里云Maven镜像：[仓库服务 (aliyun.com)](https://developer.aliyun.com/mvn/guide)
 
-  :snowflake:配置方式：[Could not resolve all artifacts for configuration ':classpath'. - 谜语+ - 博客园 (cnblogs.com)](https://www.cnblogs.com/022414ls/p/13469136.html)
+  - :snowflake:阿里云Maven镜像：[仓库服务 (aliyun.com)](https://developer.aliyun.com/mvn/guide)
 
-  :snowflake:gradle理解：[(16条消息) 【Android】解决Kotlin依赖无法下载的问题_midnight_time的博客-CSDN博客](https://blog.csdn.net/midnight_time/article/details/104449443)
+
+  - :snowflake:配置方式：[Could not resolve all artifacts for configuration ':classpath'. - 谜语+ - 博客园 (cnblogs.com)](https://www.cnblogs.com/022414ls/p/13469136.html)
+
+
+  - :snowflake:gradle理解：[(16条消息) 【Android】解决Kotlin依赖无法下载的问题_midnight_time的博客-CSDN博客](https://blog.csdn.net/midnight_time/article/details/104449443)
+
+2. 按需加载的列表，里面有固定的组件，还有一个少内容的横向滚动列表
+
+  - 布局方式：【Column】嵌套【Container】或者【Padding】固定位置的组件；横向的列表用【Scrollbar】搭配【SingleChildScrollView】水平滚动；纵向的列表用【Expanded】动态扩展高度，内嵌【ListView.builder】纵向滚动
+
+  - :snowflake:【布局溢出】问题
+
+    > :book:[(17条消息) Flutter报A RenderFlex overflowed错误（宽高度溢出）或者Flutter Widget不显示的解决办法（Expanded、Flexible）_XeonYu的博客-CSDN博客](https://blog.csdn.net/yuzhiqiang_1993/article/details/89451080)
+
+  - 【The provided ScrollController is currently attached to more than one】问题：配置滚动Widget的【controller】属性
+
+    > :book:[flutter 报错：The provided ScrollController is currently attached to more than one - 简书 (jianshu.com)](https://www.jianshu.com/p/67c74e9190c9)
+
+  - 【flutter RangeError(index): Invalid value: Not in inclusive range 0.2:3】问题：配置滚动Widget的【itemCount】属性，多个数组涉及到index，且数组长度不同会导致此问题
+
+    > :book:[flutter flutter RangeError (index): Invalid value: Not in inclusive range 0..2: 3 - 顾曲丶 - 博客园 (cnblogs.com)](https://www.cnblogs.com/fengdongliuxiang/p/14360322.html)
 
 
 

@@ -1131,6 +1131,20 @@
 
    
 
+# 九、vue-element-admin框架
+
+1. 简介：后台前端解决方案，基于【Vue】和【element-ui】实现，包含了动态路由，权限验证等功能组件:
+
+   - :ice_cream:集成方案【vue-element-admin】：https://github.com/PanJiaChen/vue-element-admin
+   - :ice_cream:基础模板【vue-admin-template】：https://github.com/PanJiaChen/vue-admin-template
+   - 桌面终端【electron-vue-admin】：https://github.com/PanJiaChen/electron-vue-admin
+
+2. :book:参考文档
+
+   > 官方文档：[介绍 | vue-element-admin (panjiachen.github.io)](https://panjiachen.github.io/vue-element-admin-site/zh/guide/#功能)
+   >
+   > 前置准备：[vue-element-admin的介绍 - 知乎 (zhihu.com)](https://zhuanlan.zhihu.com/p/404930481)
+
 # 附录、其他
 
 1. $nextTick()函数：
@@ -1168,15 +1182,15 @@
      ```
 
    - :book:参考
-   
+
      > [(49条消息) $nextTick()的作用_splx2013的博客-CSDN博客_nexttick](https://blog.csdn.net/splx2013/article/details/107636868)
-   
+
 2. axios组件：
 
    - :book:参考
 
      > [POST 请求 | Axios 中文文档 | Axios 中文网 (axios-http.cn)](https://www.axios-http.cn/docs/post_example)
-   
+
 3. :warning:组件生命周期
 
    - created：实例【创建完】之后调用，【数据侦听、计算属性、方法、事件/侦听器的回调】已经完成；【挂载】还没开始且【$el.property】尚不可以用
