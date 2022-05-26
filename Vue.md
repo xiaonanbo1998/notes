@@ -445,9 +445,9 @@
 
 4. [从vue源码解析Vue.set()和this.$set()_vue.js_脚本之家 (jb51.net)](https://www.jb51.net/article/146580.htm)
 
-# 四、模块导入
+# 四、ES6的导出和导入
 
-1. 用法一
+1. :whale2:用法一，默认导出，最基础用法
 
    ```javascript
    //	file1.js
@@ -459,31 +459,57 @@
    console.log(obj.name)
    ```
 
-2. 用法二
+2. 用法二，批量导出
 
    ```javascript
    // file1.js
    export let str = 'hank'
    export let num = 1
+   export function like() {
+       console.log('cat likes fish...')
+   }
    
    //	file2.js
-   import {str, num} from './file1.js'
+   import { str, num, like } from './file1'
    console.log(str)
    
-   //	file3.js
-   import * as obj from './file1.js'
-   console.log(obj.str)
+   import * as obj from './file1'
+   const num = obj.num						//	赋值变量
+   obj.like()								//	执行函数
    ```
 
-3. 用法三
+3. :whale2:用法三，默认和批量混用
+
+   ```javascript
+   //	file1.js
+   export const str = 'Hank'
+   export function like() {
+       console.log('cat likes fish...')
+   }
+   export default function hunt() {
+       console.log('cat hunts mouse...')
+   }
+   
+   //	file2.js
+   import { str, like } from './file1'			//	只能解构str和like，hunt不能解构
+   const name = str
+   
+   import * as cat from './file1'				//	只能接收str和like，hunt不能直接导入
+   const like = () => cat.like()				//	函数的赋值方式
+   like()										//	函数的调用
+   
+   import catAction from './file1'				//	只能接收【export default】传出的hunt函数
+   catAction()
+   ```
+
+4. 用法四，常用于css文件，需要全量导入的情况
 
    ```javascript
    //	file1.js
    console.log('hello')
    
    //	file2.js
-   import './file1.js'
-   //	打印得到【hello】
+   import './file1.js'							//	打印得到【hello】
    ```
 
 
