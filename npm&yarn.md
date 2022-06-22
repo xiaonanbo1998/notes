@@ -64,7 +64,7 @@ yarn upgrade [package]	#	upgrade package to the latest version and update [packa
    ```
 
    - :book:tips：如果文件中中没有描述字段，package.json就会使用【README.md】的第一行。该描述可帮助人们在搜索npm时找到您的包，因此在package.json中写入自定义描述，可以让人更容易找到包。
-   
+
 3. 两种类型的【依赖包列表】
 
    - dependencies：项目生产环境中需要的包
@@ -96,31 +96,51 @@ yarn upgrade [package]	#	upgrade package to the latest version and update [packa
      npm i install -g moduleName			//	安装模块到全局，npm config prefix查看
      ```
 
-     1. :lemon:npm i moduleName
-        - 安装模块到【node_modules】目录下
-        - 将模块依赖写入【dependencies】节点中
-        - 运行【npm i】初始化项目时，会下载模块
-        - 运行【npm i --production】或者注明【NODE_ENV】值为【production】时，会自动下载模块
-     2. :lemon:npm i -g moduleName
-        - 全局安装，不会在【node_modules】目录下
-        - 不会将模块依赖写入两个节点
-        - 运行【npm i】初始化项目时，不会下载模块
-     3. :lemon:npm i --save moduleName
-        - 安装模块在【node_modules】目录下
-        - 模块依赖写入【dependencies】节点
-        - 运行【npm i】初始化项目时，会下载模块
-        - 运行【npm i --production】或者注明【NODE_ENV】值为【production】时，会自动下载模块
-     4. :lemon:npm i --save-dev moduleName
-        - 安装模块在【node_modules】目录下
-        - 模块依赖写入【devDependencies】节点
-        - 运行【npm i】初始化项目时，会下载模块
-        - 运行【npm i --production】或者注明【NODE_ENV】值为【production】时，不会自动下载模块
+     :lemon:npm i moduleName
+     - 安装模块到【node_modules】目录下
+     - 将模块依赖写入【dependencies】节点中
+     - 运行【npm i】初始化项目时，会下载模块
+     - 运行【npm i --production】或者注明【NODE_ENV】值为【production】时，会自动下载模块
+     
+     :lemon:npm i -g moduleName
+     - 全局安装，不会在【node_modules】目录下
+     - 不会将模块依赖写入两个节点
+     - 运行【npm i】初始化项目时，不会下载模块
+     
+     :lemon:npm i --save moduleName
+     - 安装模块在【node_modules】目录下
+     - 模块依赖写入【dependencies】节点
+     - 运行【npm i】初始化项目时，会下载模块
+     - 运行【npm i --production】或者注明【NODE_ENV】值为【production】时，会自动下载模块
+     
+     :lemon:npm i --save-dev moduleName
+     - 安装模块在【node_modules】目录下
+     - 模块依赖写入【devDependencies】节点
+     - 运行【npm i】初始化项目时，会下载模块
+     - 运行【npm i --production】或者注明【NODE_ENV】值为【production】时，不会自动下载模块
+     
+   - :book:参考
 
-4. 参考
+     > 关于package.json：[npm关于package.json安装的那些事 - SegmentFault 思否](https://segmentfault.com/a/1190000017552119)
+     >
+     > JavaScript学习指南（第三版）
 
-   > 关于package.json：[npm关于package.json安装的那些事 - SegmentFault 思否](https://segmentfault.com/a/1190000017552119)
-   >
-   > JavaScript学习指南（第三版）
+4. 依赖的版本管理
+
+   - ~0.13.0：只更新补丁版本，即0.13.1可以，0.14.0不可以
+
+   - ^0.13.0：更新补丁和次版本，即0.13.1可以，0.14.0可以
+
+   - 0.13.0：只更新确切版本
+
+5. :lemon:package-lock.json文件
+
+   - 作用：考虑到部分依赖是通过【~或^】来指定，在另一台机器上面【npm i】初始化项目的时候，同样的项目，依赖实际上是不同的。该文件则会固化每个依赖的确切版本，初始化的时候，会指定确切版本。此外，执行【npm update】时，该文件中的依赖版本会更新
+
+   - :book:参考
+
+      > 是否写入.gitignore：[聊聊 package-lock.json 那些事儿 - 掘金 (juejin.cn)](https://juejin.cn/post/7000179306764714020)
+
 
 # 附录
 
